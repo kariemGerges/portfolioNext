@@ -119,6 +119,19 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-white text-black;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Apple-like smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Apple-like selection */
+  ::selection {
+    background-color: rgba(0, 0, 0, 0.1);
   }
 }

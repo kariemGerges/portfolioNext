@@ -1,12 +1,12 @@
 'use client';
 import { useState } from 'react';
 import { Github, Linkedin, Mail } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Card, CardContent } from '@/app/components/ui/card';
 import { Input } from '@/app/components/ui/input';
 import { Textarea } from '@/app/components/ui/textarea';
 import { toast } from 'sonner';
-
+import Image from 'next/image';
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -14,6 +14,8 @@ export default function Contact() {
         email: '',
         message: '',
     });
+
+    const prefersReducedMotion = useReducedMotion();
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -26,136 +28,190 @@ export default function Contact() {
     ) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
     return (
-        <section id="contact" className="relative px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 overflow-hidden">
-            {/* Subtle background elements */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-50/50 to-transparent pointer-events-none" />
-            
-            <div className="max-w-7xl mx-auto relative z-10">
+        <section 
+            id="contact" 
+            className="relative py-20 lg:py-32 overflow-hidden"
+        >
+            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                {/* Section Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-8 sm:mb-10 lg:mb-12"
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ 
+                        duration: prefersReducedMotion ? 0 : 0.8, 
+                        ease: [0.16, 1, 0.3, 1] 
+                    }}
+                    className="text-center mb-16 lg:mb-24"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-200 mb-6">
-                        <div className="w-2 h-2 rounded-full bg-amber-700" />
-                        <p className="text-xs sm:text-sm text-gray-600 tracking-wide uppercase font-medium">
-                            Contact
-                        </p>
+                    <div className="overflow-hidden">
+                        <motion.h2
+                            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-6 tracking-tight"
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ 
+                                duration: prefersReducedMotion ? 0 : 0.8, 
+                                delay: prefersReducedMotion ? 0 : 0.1,
+                                ease: [0.16, 1, 0.3, 1] 
+                            }}
+                        >
+                            Get in <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Touch</span>
+                        </motion.h2>
                     </div>
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light mb-4 sm:mb-6 tracking-tight">
-                        Let&apos;s discuss
-                        <br />
-                        <span className="text-amber-700">your project</span>
-                    </h2>
-                    <p className="text-sm sm:text-base lg:text-lg text-gray-600 font-light leading-relaxed max-w-2xl">
-                        Ready to transform your ideas into scalable enterprise solutions? 
-                        Let&apos;s start a conversation about your project requirements.
-                    </p>
+                    <motion.p
+                        className="text-xl sm:text-2xl text-gray-600 font-light max-w-2xl mx-auto"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ 
+                            duration: prefersReducedMotion ? 0 : 0.8, 
+                            delay: prefersReducedMotion ? 0 : 0.3,
+                            ease: [0.16, 1, 0.3, 1] 
+                        }}
+                    >
+                        Let's discuss your project.
+                    </motion.p>
                 </motion.div>
 
-                <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
+                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="space-y-5 sm:space-y-6"
+                        viewport={{ once: true, margin: '-100px' }}
+                        transition={{ 
+                            duration: prefersReducedMotion ? 0 : 0.8, 
+                            ease: [0.16, 1, 0.3, 1] 
+                        }}
+                        className="space-y-8"
                     >
-                        <div>
-                            <p className="text-xs text-gray-500 mb-2 sm:mb-3 tracking-wide uppercase font-medium">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: prefersReducedMotion ? 0 : 0.2 }}
+                        >
+                            <p className="text-sm text-gray-500 mb-3 font-light uppercase tracking-wide">
                                 Email
                             </p>
                             <a
                                 href="mailto:kariem.gerges@outlook.com"
-                                className="text-lg sm:text-xl lg:text-2xl font-light text-black hover:text-amber-700 transition-colors inline-block break-all"
+                                className="text-2xl sm:text-3xl font-light bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity inline-block break-all"
                             >
                                 kariem.gerges@outlook.com
                             </a>
-                        </div>
-                        <div>
-                            <p className="text-xs text-gray-500 mb-3 sm:mb-4 tracking-wide uppercase font-medium">
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: prefersReducedMotion ? 0 : 0.4 }}
+                        >
+                            <p className="text-sm text-gray-500 mb-4 font-light uppercase tracking-wide">
                                 Connect
                             </p>
                             <div className="flex gap-3">
-                                <a
-                                    href="https://github.com/kariemGerges"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-2.5 sm:p-3 rounded-lg bg-gray-100 hover:bg-amber-50 border border-gray-200 hover:border-amber-700/30 transition-all duration-300 group"
-                                >
-                                    <Github size={18} className="sm:w-5 sm:h-5 text-gray-700 group-hover:text-amber-700 transition-colors" />
-                                </a>
-                                <a
-                                    href="https://www.linkedin.com/in/kariem-gerges-458294195/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="p-2.5 sm:p-3 rounded-lg bg-gray-100 hover:bg-amber-50 border border-gray-200 hover:border-amber-700/30 transition-all duration-300 group"
-                                >
-                                    <Linkedin size={18} className="sm:w-5 sm:h-5 text-gray-700 group-hover:text-amber-700 transition-colors" />
-                                </a>
-                                <a
-                                    href="mailto:kariem.gerges@outlook.com"
-                                    className="p-2.5 sm:p-3 rounded-lg bg-gray-100 hover:bg-amber-50 border border-gray-200 hover:border-amber-700/30 transition-all duration-300 group"
-                                >
-                                    <Mail size={18} className="sm:w-5 sm:h-5 text-gray-700 group-hover:text-amber-700 transition-colors" />
-                                </a>
+                                {[
+                                    { href: 'https://github.com/kariemGerges', icon: Github },
+                                    { href: 'https://www.linkedin.com/in/kariem-gerges-458294195/', icon: Linkedin },
+                                    { href: 'mailto:kariem.gerges@outlook.com', icon: Mail }
+                                ].map((social, index) => {
+                                    const Icon = social.icon;
+                                    return (
+                                        <motion.a
+                                            key={index}
+                                            href={social.href}
+                                            target={social.href.startsWith('mailto:') ? undefined : '_blank'}
+                                            rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                                            className="p-3 rounded-full bg-gradient-to-br from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 transition-all border border-amber-100"
+                                            initial={{ opacity: 0, scale: 0.8 }}
+                                            whileInView={{ opacity: 1, scale: 1 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: prefersReducedMotion ? 0 : 0.4 + index * 0.1 }}
+                                            whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
+                                            whileTap={{ scale: 0.95 }}
+                                        >
+                                            <Icon size={20} className="text-amber-600" />
+                                        </motion.a>
+                                    );
+                                })}
                             </div>
-                        </div>
+                        </motion.div>
+                        
+                        {/* Illustration */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: prefersReducedMotion ? 0 : 0.6 }}
+                            className="mt-8"
+                        >
+                            <div className="relative w-full max-w-md mx-auto lg:mx-0 aspect-square">
+                                <Image
+                                    src="/contact.png"
+                                    alt="Connecting ideas and solutions"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                        </motion.div>
                     </motion.div>
                     <motion.div
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, margin: '-100px' }}
+                        transition={{ 
+                            duration: prefersReducedMotion ? 0 : 0.8, 
+                            delay: prefersReducedMotion ? 0 : 0.2,
+                            ease: [0.16, 1, 0.3, 1] 
+                        }}
                     >
-                        <Card className="border border-gray-200 shadow-lg">
-                            <CardContent className="p-4 sm:p-5 lg:p-6">
+                        <Card className="border border-gray-200 shadow-sm">
+                            <CardContent className="p-8">
                                 <form
                                     onSubmit={handleSubmit}
-                                    className="space-y-4 sm:space-y-5"
+                                    className="space-y-6"
                                 >
-                                    <div>
-                                        <label
-                                            htmlFor="name"
-                                            className="text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2 block"
+                                    {[
+                                        { id: 'name', label: 'Name', placeholder: 'Your name', type: 'text' },
+                                        { id: 'email', label: 'Email', placeholder: 'your@email.com', type: 'email' },
+                                    ].map((field, index) => (
+                                        <motion.div
+                                            key={field.id}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: prefersReducedMotion ? 0 : 0.3 + index * 0.1 }}
                                         >
-                                            Name
+                                        <label
+                                                htmlFor={field.id}
+                                                className="text-sm font-light text-gray-700 mb-2 block"
+                                        >
+                                                {field.label}
                                         </label>
                                         <Input
-                                            id="name"
-                                            name="name"
-                                            value={formData.name}
+                                                id={field.id}
+                                                name={field.id}
+                                                type={field.type}
+                                                value={formData[field.id as keyof typeof formData]}
                                             onChange={handleChange}
-                                            placeholder="Your name"
+                                                placeholder={field.placeholder}
                                             required
-                                            className="bg-white border-gray-300 focus:border-amber-700 focus:ring-amber-700 placeholder:text-gray-400 h-10 sm:h-11 text-sm"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label
-                                            htmlFor="email"
-                                            className="text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2 block"
-                                        >
-                                            Email
-                                        </label>
-                                        <Input
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            placeholder="your@email.com"
-                                            required
-                                            className="bg-white border-gray-300 focus:border-amber-700 focus:ring-amber-700 placeholder:text-gray-400 h-10 sm:h-11 text-sm"
-                                        />
-                                    </div>
-                                    <div>
+                                                className="bg-white border-gray-300 focus:border-amber-600 focus:ring-amber-600 h-12 text-base transition-all"
+                                            />
+                                        </motion.div>
+                                    ))}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: prefersReducedMotion ? 0 : 0.5 }}
+                                    >
                                         <label
                                             htmlFor="message"
-                                            className="text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2 block"
+                                            className="text-sm font-light text-gray-700 mb-2 block"
                                         >
                                             Message
                                         </label>
@@ -165,18 +221,24 @@ export default function Contact() {
                                             value={formData.message}
                                             onChange={handleChange}
                                             placeholder="Tell me about your project..."
-                                            rows={5}
+                                            rows={6}
                                             required
-                                            className="bg-white border-gray-300 focus:border-amber-700 focus:ring-amber-700 placeholder:text-gray-400 resize-none text-sm"
+                                            className="bg-white border-gray-300 focus:border-amber-600 focus:ring-amber-600 resize-none text-base transition-all"
                                         />
-                                    </div>
-                                    <button
+                                    </motion.div>
+                                    <motion.button
                                         type="submit"
-                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-lg font-medium text-sm hover:bg-gray-900 transition-all duration-300 shadow-lg hover:shadow-xl"
+                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-lg font-light text-base hover:shadow-xl transition-all"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: prefersReducedMotion ? 0 : 0.6 }}
+                                        whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
                                     >
                                         <span>Send Message</span>
-                                        <Mail size={16} />
-                                    </button>
+                                        <Mail size={18} />
+                                    </motion.button>
                                 </form>
                             </CardContent>
                         </Card>

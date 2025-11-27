@@ -1,6 +1,6 @@
 'use client';
-import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, Clock, BookOpen } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
 
 // Sample blog posts - replace with your actual blog data
@@ -35,84 +35,116 @@ const featuredPosts = [
 ];
 
 export default function BlogTeaser() {
+    const prefersReducedMotion = useReducedMotion();
+
     return (
-        <section id="blog" className="relative px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 overflow-hidden">
-            {/* Subtle background elements */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-50/30 to-transparent pointer-events-none" />
-            
-            <div className="max-w-7xl mx-auto relative z-10">
+        <section 
+            id="blog" 
+            className="relative py-20 lg:py-32 overflow-hidden"
+        >
+            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                {/* Section Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-8 sm:mb-10 lg:mb-12"
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ 
+                        duration: prefersReducedMotion ? 0 : 0.8, 
+                        ease: [0.16, 1, 0.3, 1] 
+                    }}
+                    className="mb-16 lg:mb-24"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-200 mb-6">
-                        <div className="w-2 h-2 rounded-full bg-amber-700" />
-                        <p className="text-xs sm:text-sm text-gray-600 tracking-wide uppercase font-medium">
-                            Blog
-                        </p>
-                    </div>
-                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-8">
                         <div>
-                            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light mb-4 sm:mb-6 tracking-tight">
-                                Latest Insights
-                                <br />
-                                <span className="text-amber-700">From the Field</span>
-                            </h2>
-                            <p className="text-sm sm:text-base lg:text-lg text-gray-600 font-light leading-relaxed max-w-2xl">
+                            <div className="overflow-hidden">
+                                <motion.h2
+                                    className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-6 tracking-tight"
+                                    initial={{ opacity: 0, y: 50 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ 
+                                        duration: prefersReducedMotion ? 0 : 0.8, 
+                                        delay: prefersReducedMotion ? 0 : 0.1,
+                                        ease: [0.16, 1, 0.3, 1] 
+                                    }}
+                                >
+                                    Latest <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Insights</span>
+                                </motion.h2>
+                            </div>
+                            <motion.p
+                                className="text-xl sm:text-2xl text-gray-600 font-light max-w-2xl"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ 
+                                    duration: prefersReducedMotion ? 0 : 0.8, 
+                                    delay: prefersReducedMotion ? 0 : 0.3,
+                                    ease: [0.16, 1, 0.3, 1] 
+                                }}
+                            >
                                 Thoughts on software engineering, design, and building products that matter.
-                            </p>
+                            </motion.p>
                         </div>
-                        <Link
-                            href="/pages/blog"
-                            className="group inline-flex items-center gap-2 text-sm sm:text-base font-medium text-gray-600 hover:text-black transition-colors"
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: prefersReducedMotion ? 0 : 0.4 }}
                         >
-                            <span>View All Posts</span>
-                            <ArrowRight
-                                size={16}
-                                className="transition-transform group-hover:translate-x-1"
-                            />
-                        </Link>
+                            <Link
+                                href="/pages/blog"
+                                className="group inline-flex items-center gap-2 text-lg text-amber-600 hover:text-orange-600 transition-colors"
+                            >
+                                <span>View All</span>
+                                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                            </Link>
+                        </motion.div>
                     </div>
                 </motion.div>
 
                 {/* Blog Posts Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {featuredPosts.map((post, index) => (
                         <motion.article
                             key={post.id}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
                             viewport={{ once: true, margin: '-50px' }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            transition={{ 
+                                duration: prefersReducedMotion ? 0 : 0.6, 
+                                delay: prefersReducedMotion ? 0 : index * 0.15,
+                                ease: [0.16, 1, 0.3, 1] 
+                            }}
                             className="group"
+                            whileHover={prefersReducedMotion ? {} : { y: -8 }}
                         >
                             <Link href={`/pages/blog/${post.slug}`}>
-                                <div className="h-full p-5 sm:p-6 rounded-lg border border-gray-200 hover:border-amber-700/50 transition-all duration-300 hover:shadow-xl bg-white">
-                                    {/* Category Badge */}
-                                    <div className="flex items-center gap-2 mb-4">
-                                        <BookOpen className="w-4 h-4 text-amber-700" />
-                                        <span className="text-xs font-medium text-amber-700 uppercase tracking-wide">
-                                            {post.category}
-                                        </span>
-                                    </div>
+                                <div className="h-full space-y-4">
+                                    {/* Category */}
+                                    <motion.div
+                                        className="text-sm bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent font-light uppercase tracking-wide"
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: prefersReducedMotion ? 0 : index * 0.15 + 0.2 }}
+                                    >
+                                        {post.category}
+                                    </motion.div>
 
                                     {/* Title */}
-                                    <h3 className="text-lg sm:text-xl font-light mb-3 tracking-tight group-hover:text-amber-700 transition-colors">
+                                    <h3 className="text-2xl sm:text-3xl font-light tracking-tight group-hover:bg-gradient-to-r group-hover:from-amber-600 group-hover:to-orange-600 group-hover:bg-clip-text group-hover:text-transparent transition-all">
                                         {post.title}
                                     </h3>
 
                                     {/* Excerpt */}
-                                    <p className="text-sm sm:text-base text-gray-600 font-light leading-relaxed mb-4 line-clamp-3">
+                                    <p className="text-base text-gray-600 font-light leading-relaxed line-clamp-3">
                                         {post.excerpt}
                                     </p>
 
                                     {/* Meta Info */}
-                                    <div className="flex items-center gap-4 text-xs text-gray-500 pt-4 border-t border-gray-100">
+                                    <div className="flex items-center gap-4 text-sm text-gray-500 pt-4 border-t border-gray-200">
                                         <div className="flex items-center gap-1.5">
-                                            <Calendar className="w-3 h-3" />
+                                            <Calendar className="w-4 h-4" />
                                             <time dateTime={post.date}>
                                                 {new Date(post.date).toLocaleDateString('en-US', {
                                                     month: 'short',
@@ -122,15 +154,9 @@ export default function BlogTeaser() {
                                             </time>
                                         </div>
                                         <div className="flex items-center gap-1.5">
-                                            <Clock className="w-3 h-3" />
+                                            <Clock className="w-4 h-4" />
                                             <span>{post.readTime}</span>
                                         </div>
-                                    </div>
-
-                                    {/* Read More Indicator */}
-                                    <div className="mt-4 flex items-center gap-2 text-xs font-medium text-amber-700 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <span>Read Article</span>
-                                        <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                                     </div>
                                 </div>
                             </Link>
@@ -141,4 +167,3 @@ export default function BlogTeaser() {
         </section>
     );
 }
-

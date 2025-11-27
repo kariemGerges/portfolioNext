@@ -1,12 +1,11 @@
 'use client';
-import { motion } from 'framer-motion';
-import { Code2, TrendingUp, Award, Users } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 const stats = [
-    { label: 'Years Experience', value: '5+', icon: TrendingUp },
-    { label: 'Projects Delivered', value: '50+', icon: Code2 },
-    { label: 'Enterprise Clients', value: '20+', icon: Users },
-    { label: 'Success Rate', value: '100%', icon: Award },
+    { label: 'Years Experience', value: '5+' },
+    { label: 'Projects Delivered', value: '50+' },
+    { label: 'Enterprise Clients', value: '20+' },
+    { label: 'Success Rate', value: '100%' },
 ];
 
 const skills = [
@@ -19,132 +18,196 @@ const skills = [
 ];
 
 export default function About() {
+    const prefersReducedMotion = useReducedMotion();
+
     return (
-        <section id="about" className="relative px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 overflow-hidden">
-            {/* Subtle background elements */}
-            <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 via-transparent to-transparent pointer-events-none" />
-            
-            <div className="max-w-7xl mx-auto relative z-10">
+        <section 
+            id="about" 
+            className="relative py-20 lg:py-32 overflow-hidden"
+        >
+            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                {/* Section Header with text reveal */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-8 sm:mb-10 lg:mb-12"
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ 
+                        duration: prefersReducedMotion ? 0 : 0.8, 
+                        ease: [0.16, 1, 0.3, 1] 
+                    }}
+                    className="text-center mb-16 lg:mb-24"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-200 mb-6">
-                        <div className="w-2 h-2 rounded-full bg-amber-700" />
-                        <p className="text-xs sm:text-sm text-gray-600 tracking-wide uppercase font-medium">
-                            About
-                        </p>
+                    <div className="overflow-hidden">
+                        <motion.h2
+                            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-6 tracking-tight"
+                            initial={{ opacity: 0, y: 50 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ 
+                                duration: prefersReducedMotion ? 0 : 0.8, 
+                                delay: prefersReducedMotion ? 0 : 0.1,
+                                ease: [0.16, 1, 0.3, 1] 
+                            }}
+                        >
+                            <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">About</span>
+                        </motion.h2>
                     </div>
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light leading-[1.1] mb-4 sm:mb-6 tracking-tight">
-                        Building enterprise solutions
-                        <br />
-                        <span className="text-amber-700">that drive business growth</span>
-                    </h2>
+                    <motion.p
+                        className="text-xl sm:text-2xl text-gray-600 font-light max-w-2xl mx-auto"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ 
+                            duration: prefersReducedMotion ? 0 : 0.8, 
+                            delay: prefersReducedMotion ? 0 : 0.3,
+                            ease: [0.16, 1, 0.3, 1] 
+                        }}
+                    >
+                        Building enterprise solutions that drive business growth.
+                    </motion.p>
                 </motion.div>
 
-                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-start">
-                    {/* Left Column - Story */}
+                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+                    {/* Left Column - Story with staggered text */}
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="space-y-4 sm:space-y-5 text-gray-600 font-light leading-relaxed"
+                        viewport={{ once: true, margin: '-100px' }}
+                        transition={{ 
+                            duration: prefersReducedMotion ? 0 : 0.8, 
+                            ease: [0.16, 1, 0.3, 1] 
+                        }}
+                        className="space-y-6 text-lg sm:text-xl text-gray-600 font-light leading-relaxed"
                     >
-                        <p className="text-base sm:text-lg lg:text-xl">
-                            With over <span className="font-medium text-black">5 years</span> of experience in enterprise software development, 
-                            I specialize in architecting scalable systems that deliver measurable business value 
-                            and exceptional user experiences.
-                        </p>
-                        <p className="text-sm sm:text-base lg:text-lg">
-                            My approach combines deep technical expertise with strategic business thinking, 
-                            resulting in solutions that are both robust and intuitive. I focus on writing 
-                            clean, maintainable code that scales with organizational growth.
-                        </p>
-                        <p className="text-sm sm:text-base lg:text-lg">
-                            I work closely with stakeholders to understand business objectives, translating 
-                            complex requirements into elegant technical solutions. My commitment to best 
-                            practices and continuous learning ensures projects are built on solid foundations.
-                        </p>
-                        <div className="pt-3 sm:pt-4 border-t border-gray-200">
-                            <p className="text-amber-700 font-medium text-sm sm:text-base">
-                                Currently available for enterprise projects and strategic consulting engagements.
-                            </p>
-                        </div>
+                        {[
+                            "With over 5 years of experience in enterprise software development, I specialize in architecting scalable systems that deliver measurable business value and exceptional user experiences.",
+                            "My approach combines deep technical expertise with strategic business thinking, resulting in solutions that are both robust and intuitive. I focus on writing clean, maintainable code that scales with organizational growth.",
+                            "I work closely with stakeholders to understand business objectives, translating complex requirements into elegant technical solutions. My commitment to best practices and continuous learning ensures projects are built on solid foundations.",
+                            "Currently available for enterprise projects and strategic consulting engagements."
+                        ].map((text, index) => (
+                            <motion.p
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ 
+                                    duration: prefersReducedMotion ? 0 : 0.6, 
+                                    delay: prefersReducedMotion ? 0 : index * 0.1,
+                                    ease: [0.16, 1, 0.3, 1] 
+                                }}
+                                className={index === 0 ? "font-normal text-black" : index === 3 ? "text-amber-600 font-medium" : ""}
+                            >
+                                {index === 0 ? (
+                                    <>
+                                        With over <span className="font-semibold text-amber-600">5 years</span> of experience in enterprise software development, I specialize in architecting scalable systems that deliver measurable business value and exceptional user experiences.
+                                    </>
+                                ) : (
+                                    text
+                                )}
+                            </motion.p>
+                        ))}
                     </motion.div>
 
                     {/* Right Column - Stats & Skills */}
-                    <div className="space-y-6 sm:space-y-8 lg:space-y-10">
-                        {/* Stats Grid */}
+                    <div className="space-y-12">
+                        {/* Stats Grid with stagger */}
                         <motion.div
-                            initial={{ opacity: 0, x: 20 }}
+                            initial={{ opacity: 0, x: 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-6"
+                            viewport={{ once: true, margin: '-100px' }}
+                            transition={{ 
+                                duration: prefersReducedMotion ? 0 : 0.8, 
+                                ease: [0.16, 1, 0.3, 1] 
+                            }}
+                            className="grid grid-cols-2 gap-6"
                         >
-                            {stats.map((stat, index) => {
-                                const Icon = stat.icon;
-                                return (
+                            {stats.map((stat, index) => (
+                                <motion.div
+                                    key={stat.label}
+                                    initial={{ opacity: 0, scale: 0.8, y: 30 }}
+                                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ 
+                                        duration: prefersReducedMotion ? 0 : 0.6, 
+                                        delay: prefersReducedMotion ? 0 : index * 0.1,
+                                        ease: [0.16, 1, 0.3, 1] 
+                                    }}
+                                    className="text-center"
+                                    whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
+                                >
                                     <motion.div
-                                        key={stat.label}
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        className="text-5xl sm:text-6xl font-light mb-2 bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent"
+                                        initial={{ opacity: 0 }}
+                                        whileInView={{ opacity: 1 }}
                                         viewport={{ once: true }}
-                                        transition={{ duration: 0.4, delay: index * 0.1 }}
-                                        className="p-4 sm:p-5 lg:p-6 bg-white rounded-lg border border-gray-200 hover:border-amber-700/30 transition-all duration-300 hover:shadow-md"
+                                        transition={{ delay: prefersReducedMotion ? 0 : index * 0.1 + 0.3 }}
                                     >
-                                        <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                                            <div className="p-1.5 sm:p-2 bg-amber-50 rounded-lg">
-                                                <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-amber-700" />
-                                            </div>
-                                        </div>
-                                        <div className="text-2xl sm:text-3xl lg:text-4xl font-light mb-1 sm:mb-2 text-black">
-                                            {stat.value}
-                                        </div>
-                                        <div className="text-[10px] sm:text-xs lg:text-sm text-gray-600 font-medium uppercase tracking-wide leading-tight">
-                                            {stat.label}
-                                        </div>
+                                        {stat.value}
                                     </motion.div>
-                                );
-                            })}
+                                    <div className="text-sm text-gray-600 font-light">
+                                        {stat.label}
+                                    </div>
+                                </motion.div>
+                            ))}
                         </motion.div>
 
                         {/* Skills */}
                         <motion.div
-                            initial={{ opacity: 0, x: 20 }}
+                            initial={{ opacity: 0, x: 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="pt-5 sm:pt-6 lg:pt-8 border-t border-gray-200"
+                            viewport={{ once: true, margin: '-100px' }}
+                            transition={{ 
+                                duration: prefersReducedMotion ? 0 : 0.8, 
+                                delay: prefersReducedMotion ? 0 : 0.2,
+                                ease: [0.16, 1, 0.3, 1] 
+                            }}
+                            className="pt-8 border-t border-gray-200"
                         >
-                            <h3 className="text-lg sm:text-xl lg:text-2xl font-light mb-4 sm:mb-6 tracking-tight">
+                            <motion.h3
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: prefersReducedMotion ? 0 : 0.3 }}
+                                className="text-3xl sm:text-4xl font-light mb-8 tracking-tight"
+                            >
                                 Technical Expertise
-                            </h3>
-                            <div className="space-y-3 sm:space-y-4">
+                            </motion.h3>
+                            <div className="space-y-6">
                                 {skills.map((skill, index) => (
-                                    <div key={skill.name}>
+                                    <motion.div
+                                        key={skill.name}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ 
+                                            duration: prefersReducedMotion ? 0 : 0.5, 
+                                            delay: prefersReducedMotion ? 0 : index * 0.1,
+                                            ease: [0.16, 1, 0.3, 1] 
+                                        }}
+                                    >
                                         <div className="flex justify-between items-center mb-2">
-                                            <span className="text-xs sm:text-sm lg:text-base text-gray-700 font-medium">
+                                            <span className="text-base text-gray-700 font-light">
                                                 {skill.name}
                                             </span>
-                                            <span className="text-xs text-gray-500 font-medium">
+                                            <span className="text-sm text-gray-500 font-light">
                                                 {skill.level}%
                                             </span>
                                         </div>
-                                        <div className="h-2 sm:h-2.5 bg-gray-100 rounded-full overflow-hidden border border-gray-200">
+                                        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
                                             <motion.div
                                                 initial={{ width: 0 }}
                                                 whileInView={{ width: `${skill.level}%` }}
                                                 viewport={{ once: true }}
-                                                transition={{ duration: 1, delay: index * 0.1, ease: "easeOut" }}
-                                                className="h-full bg-gradient-to-r from-amber-600 to-amber-700 rounded-full"
+                                                transition={{ 
+                                                    duration: prefersReducedMotion ? 0 : 1.2, 
+                                                    delay: prefersReducedMotion ? 0 : index * 0.1 + 0.5,
+                                                    ease: [0.16, 1, 0.3, 1] 
+                                                }}
+                                                className="h-full bg-gradient-to-r from-amber-600 to-orange-600 rounded-full"
+                                                style={{ willChange: 'width' }}
                                             />
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
                         </motion.div>
