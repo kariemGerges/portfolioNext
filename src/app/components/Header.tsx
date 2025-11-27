@@ -7,7 +7,6 @@ export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const { scrollY } = useScroll();
-    const opacity = useTransform(scrollY, [0, 50], [0, 1]);
 
     useEffect(() => {
         const handleScroll = () => {
