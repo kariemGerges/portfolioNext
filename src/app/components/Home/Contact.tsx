@@ -228,7 +228,7 @@ export default function Contact() {
                                     </motion.div>
                                     <motion.button
                                         type="submit"
-                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-lg font-light text-base hover:shadow-xl transition-all"
+                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-lg font-light text-base hover:shadow-xl transition-all min-h-[44px] touch-manipulation"
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}

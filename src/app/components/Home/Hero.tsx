@@ -2,11 +2,12 @@
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, ArrowDown } from 'lucide-react';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export default function Hero() {
     const ref = useRef<HTMLDivElement>(null);
     const prefersReducedMotion = useReducedMotion();
+    const [scrollY, setScrollY] = useState(0);
     
     const { scrollYProgress } = useScroll({
         target: ref,
@@ -14,6 +15,14 @@ export default function Hero() {
     });
 
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollY(window.scrollY);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <section 
@@ -103,7 +112,7 @@ export default function Hero() {
 
                     {/* CTA Buttons */}
                     <motion.div
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ 
@@ -119,13 +128,13 @@ export default function Hero() {
                         >
                             <Link
                                 href="/pages/work"
-                                className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full text-lg font-medium hover:shadow-xl transition-all duration-300 backdrop-blur-sm"
+                                className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full text-base sm:text-lg font-medium hover:shadow-xl transition-all duration-300 backdrop-blur-sm min-h-[44px] touch-manipulation"
                             >
                                 <span>View Work</span>
-                                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
                             </Link>
                         </motion.div>
-                        <span className=" hidden sm:inline">/</span>
+                        <span className="hidden sm:inline text-gray-400">/</span>
                         <motion.div
                             whileHover={{ scale: 1.15, x: 4 }}
                             whileTap={{ scale: 0.95 }}
@@ -133,7 +142,7 @@ export default function Hero() {
                         >
                             <Link
                                 href="#contact"
-                                className="group relative inline-block text-lg text-gray-600 hover:text-amber-600 transition-colors"
+                                className="group relative inline-block text-base sm:text-lg text-gray-600 hover:text-amber-600 transition-colors min-h-[44px] flex items-center touch-manipulation"
                             >
                                 <span className="relative z-10">Get in touch</span>
                                 <motion.span
@@ -147,11 +156,36 @@ export default function Hero() {
                     </motion.div>
                 </div>
             </motion.div>
-            <div className="absolute inset-0 z-0 
-         
-            ">
-                <ArrowDown className="w-5 h-5 absolute bottom-10 left-1/2 -translate-x-1/2 text-amber-600 animate-bounce cursor-pointer" />
-            </div>
+            
+            {/* Animated Arrow at end of section - disappears on scroll */}
+            {scrollY < 100 && (
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.6, delay: 1 }}
+                    className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 z-20"
+                >
+                    <motion.div
+                        animate={{ y: [0, 8, 0] }}
+                        transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        className="flex flex-col items-center gap-2 cursor-pointer"
+                        onClick={() => {
+                            const nextSection = document.getElementById('experience') || document.getElementById('work');
+                            if (nextSection) {
+                                nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        }}
+                    >
+                        <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
+                        <span className="text-xs sm:text-sm text-amber-600 font-light">Scroll</span>
+                    </motion.div>
+                </motion.div>
+            )}
         </section>
     );
 }

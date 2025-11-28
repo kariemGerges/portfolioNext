@@ -2,40 +2,69 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 
-// Sample blog posts - replace with your actual blog data
-const featuredPosts = [
-    {
-        id: 1,
-        title: 'Building Scalable Enterprise Applications with Next.js',
-        excerpt: 'Learn how to architect and build enterprise-grade applications that scale with your business needs using modern React and Next.js patterns.',
-        date: '2024-01-15',
-        readTime: '5 min read',
-        category: 'Engineering',
-        slug: 'building-scalable-enterprise-applications',
-    },
-    {
-        id: 2,
-        title: 'The Art of Clean Code: Best Practices for Modern Development',
-        excerpt: 'Exploring principles and patterns that make code maintainable, readable, and efficient in large-scale projects.',
-        date: '2024-01-08',
-        readTime: '7 min read',
-        category: 'Development',
-        slug: 'clean-code-best-practices',
-    },
-    {
-        id: 3,
-        title: 'Design Systems: Creating Consistent UI Experiences',
-        excerpt: 'How to build and maintain design systems that ensure consistency across products while enabling rapid development.',
-        date: '2024-01-01',
-        readTime: '6 min read',
-        category: 'Design',
-        slug: 'design-systems-consistent-ui',
-    },
-];
+interface BlogPost {
+    _id: string;
+    title: string;
+    body: string | { excerpt?: string };
+    date: string;
+    slug: string;
+    categories?: Array<{ name: string; _id: string }>;
+    image?: string;
+}
+
+// Helper function to calculate read time - memoized
+const calculateReadTime = (body: string | { excerpt?: string }): string => {
+    const text = typeof body === 'string' ? body : body.excerpt || '';
+    const wordsPerMinute = 200;
+    const words = text.split(/\s+/).length;
+    const minutes = Math.ceil(words / wordsPerMinute);
+    return `${minutes} min read`;
+};
+
+// Helper function to get excerpt from body - memoized
+const getExcerpt = (body: string | { excerpt?: string }): string => {
+    if (typeof body === 'string') {
+        return body.length > 150 ? body.substring(0, 150) + '...' : body;
+    }
+    return body.excerpt || '';
+};
 
 export default function BlogTeaser() {
     const prefersReducedMotion = useReducedMotion();
+    const [featuredPosts, setFeaturedPosts] = useState<BlogPost[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        let isMounted = true;
+        
+        async function fetchPosts() {
+            try {
+                const response = await fetch('/api/posts?limit=3&sort=-date');
+                if (response.ok) {
+                    const data = await response.json();
+                    // Handle both old format (array) and new format (with posts property)
+                    const posts = data.posts || data;
+                    if (isMounted && Array.isArray(posts)) {
+                        setFeaturedPosts(posts);
+                    }
+                }
+            } catch (err) {
+                console.error('Error fetching posts:', err);
+            } finally {
+                if (isMounted) {
+                    setLoading(false);
+                }
+            }
+        }
+
+        fetchPosts();
+        
+        return () => {
+            isMounted = false;
+        };
+    }, []);
 
     return (
         <section 
@@ -103,66 +132,85 @@ export default function BlogTeaser() {
                 </motion.div>
 
                 {/* Blog Posts Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {featuredPosts.map((post, index) => (
-                        <motion.article
-                            key={post.id}
-                            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                            viewport={{ once: true, margin: '-50px' }}
-                            transition={{ 
-                                duration: prefersReducedMotion ? 0 : 0.6, 
-                                delay: prefersReducedMotion ? 0 : index * 0.15,
-                                ease: [0.16, 1, 0.3, 1] 
-                            }}
-                            className="group"
-                            whileHover={prefersReducedMotion ? {} : { y: -8 }}
-                        >
-                            <Link href={`/pages/blog/${post.slug}`}>
-                                <div className="h-full space-y-4">
-                                    {/* Category */}
-                                    <motion.div
-                                        className="text-sm bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent font-light uppercase tracking-wide"
-                                        initial={{ opacity: 0 }}
-                                        whileInView={{ opacity: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: prefersReducedMotion ? 0 : index * 0.15 + 0.2 }}
-                                    >
-                                        {post.category}
-                                    </motion.div>
+                {loading ? (
+                    <div className="text-center py-12">
+                        <p className="text-gray-600">Loading latest posts...</p>
+                    </div>
+                ) : featuredPosts.length === 0 ? (
+                    <div className="text-center py-12">
+                        <p className="text-gray-600">No blog posts yet. Check back soon!</p>
+                    </div>
+                ) : (
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {featuredPosts.map((post, index) => {
+                            const categoryName = post.categories && post.categories.length > 0 
+                                ? post.categories[0].name 
+                                : 'Uncategorized';
+                            const excerpt = getExcerpt(post.body);
+                            const readTime = calculateReadTime(post.body);
+                            const postDate = new Date(post.date).toISOString();
 
-                                    {/* Title */}
-                                    <h3 className="text-2xl sm:text-3xl font-light tracking-tight group-hover:bg-gradient-to-r group-hover:from-amber-600 group-hover:to-orange-600 group-hover:bg-clip-text group-hover:text-transparent transition-all">
-                                        {post.title}
-                                    </h3>
+                            return (
+                                <motion.article
+                                    key={post._id}
+                                    initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                    viewport={{ once: true, margin: '-50px' }}
+                                    transition={{ 
+                                        duration: prefersReducedMotion ? 0 : 0.6, 
+                                        delay: prefersReducedMotion ? 0 : index * 0.15,
+                                        ease: [0.16, 1, 0.3, 1] 
+                                    }}
+                                    className="group"
+                                    whileHover={prefersReducedMotion ? {} : { y: -8 }}
+                                >
+                                    <Link href={`/pages/blog/${post.slug || post._id}`}>
+                                        <div className="h-full space-y-4">
+                                            {/* Category */}
+                                            <motion.div
+                                                className="text-sm bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent font-light uppercase tracking-wide"
+                                                initial={{ opacity: 0 }}
+                                                whileInView={{ opacity: 1 }}
+                                                viewport={{ once: true }}
+                                                transition={{ delay: prefersReducedMotion ? 0 : index * 0.15 + 0.2 }}
+                                            >
+                                                {categoryName}
+                                            </motion.div>
 
-                                    {/* Excerpt */}
-                                    <p className="text-base text-gray-600 font-light leading-relaxed line-clamp-3">
-                                        {post.excerpt}
-                                    </p>
+                                            {/* Title */}
+                                            <h3 className="text-2xl sm:text-3xl font-light tracking-tight group-hover:bg-gradient-to-r group-hover:from-amber-600 group-hover:to-orange-600 group-hover:bg-clip-text group-hover:text-transparent transition-all">
+                                                {post.title}
+                                            </h3>
 
-                                    {/* Meta Info */}
-                                    <div className="flex items-center gap-4 text-sm text-gray-500 pt-4 border-t border-gray-200">
-                                        <div className="flex items-center gap-1.5">
-                                            <Calendar className="w-4 h-4" />
-                                            <time dateTime={post.date}>
-                                                {new Date(post.date).toLocaleDateString('en-US', {
-                                                    month: 'short',
-                                                    day: 'numeric',
-                                                    year: 'numeric',
-                                                })}
-                                            </time>
+                                            {/* Excerpt */}
+                                            <p className="text-base text-gray-600 font-light leading-relaxed line-clamp-3">
+                                                {excerpt}
+                                            </p>
+
+                                            {/* Meta Info */}
+                                            <div className="flex items-center gap-4 text-sm text-gray-500 pt-4 border-t border-gray-200">
+                                                <div className="flex items-center gap-1.5">
+                                                    <Calendar className="w-4 h-4" />
+                                                    <time dateTime={postDate}>
+                                                        {new Date(post.date).toLocaleDateString('en-US', {
+                                                            month: 'short',
+                                                            day: 'numeric',
+                                                            year: 'numeric',
+                                                        })}
+                                                    </time>
+                                                </div>
+                                                <div className="flex items-center gap-1.5">
+                                                    <Clock className="w-4 h-4" />
+                                                    <span>{readTime}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="flex items-center gap-1.5">
-                                            <Clock className="w-4 h-4" />
-                                            <span>{post.readTime}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-                        </motion.article>
-                    ))}
-                </div>
+                                    </Link>
+                                </motion.article>
+                            );
+                        })}
+                    </div>
+                )}
             </div>
         </section>
     );

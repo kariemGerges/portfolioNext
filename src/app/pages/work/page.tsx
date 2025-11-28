@@ -10,6 +10,7 @@ import {
     Globe, 
     Filter,
     ArrowRight,
+    ArrowLeft,
     Smartphone,
     GraduationCap,
     TrendingUp,
@@ -176,6 +177,13 @@ export default function Work() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                     >
+                        <Link
+                            href="/"
+                            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors mb-6"
+                        >
+                            <ArrowLeft size={16} />
+                            <span>Back to Home</span>
+                        </Link>
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-200 mb-6">
                             <div className="w-2 h-2 rounded-full bg-amber-700" />
                             <p className="text-xs sm:text-sm text-gray-600 tracking-wide uppercase font-medium">
@@ -207,7 +215,7 @@ export default function Work() {
                                 <button
                                     key={category}
                                     onClick={() => setSelectedCategory(category)}
-                                    className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 flex items-center gap-1.5 sm:gap-2 ${
+                                    className={`px-3 py-2 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 flex items-center gap-1.5 sm:gap-2 min-h-[36px] touch-manipulation ${
                                         selectedCategory === category
                                             ? 'bg-black text-white shadow-lg'
                                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
@@ -349,10 +357,10 @@ export default function Work() {
                                     
                                     <button
                                         onClick={() => setSelectedProject(null)}
-                                        className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10 p-2 sm:p-3 bg-white/90 backdrop-blur-sm rounded-lg hover:bg-white transition-colors"
+                                        className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10 p-2 sm:p-3 bg-white/90 backdrop-blur-sm rounded-lg hover:bg-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
                                         aria-label="Close modal"
                                     >
-                                        <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-900" />
+                                        <X className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900" />
                                     </button>
 
                                     <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 z-10">
@@ -377,10 +385,10 @@ export default function Work() {
                                                 href={selectedProject.webSite}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-white text-black rounded-lg font-medium text-sm hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl"
+                                                className="inline-flex items-center gap-2 px-4 sm:px-6 py-3 sm:py-3 bg-white text-black rounded-lg font-medium text-sm sm:text-base hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl min-h-[44px] touch-manipulation"
                                             >
                                                 <span>Visit Project</span>
-                                                <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+                                                <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
                                             </a>
                                         )}
                                     </div>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/Header";
 import { Footer } from "./components/Footer";
-import { Toaster } from '@/app/components/ui/sonner'
+import { Toaster } from '@/app/components/ui/sonner';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://kariemgerges.com'),
