@@ -14,13 +14,41 @@ export default function Contact() {
         email: '',
         message: '',
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const prefersReducedMotion = useReducedMotion();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        toast.success("Message sent successfully! I'll get back to you soon.");
-        setFormData({ name: '', email: '', message: '' });
+        setIsSubmitting(true);
+
+        try {
+            const response = await fetch('/api/email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to send message');
+            }
+
+            toast.success("Message sent successfully! I'll get back to you soon.");
+            setFormData({ name: '', email: '', message: '' });
+        } catch (error) {
+            console.error('Error sending message:', error);
+            toast.error(
+                error instanceof Error 
+                    ? error.message 
+                    : 'Failed to send message. Please try again later.'
+            );
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (
@@ -228,16 +256,31 @@ export default function Contact() {
                                     </motion.div>
                                     <motion.button
                                         type="submit"
-                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-lg font-light text-base hover:shadow-xl transition-all min-h-[44px] touch-manipulation"
+                                        disabled={isSubmitting}
+                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-lg font-light text-base hover:shadow-xl transition-all min-h-[44px] touch-manipulation disabled:opacity-50 disabled:cursor-not-allowed"
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: prefersReducedMotion ? 0 : 0.6 }}
-                                        whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
+                                        whileHover={prefersReducedMotion || isSubmitting ? {} : { scale: 1.02 }}
+                                        whileTap={isSubmitting ? {} : { scale: 0.98 }}
                                     >
-                                        <span>Send Message</span>
-                                        <Mail size={18} />
+                                        {isSubmitting ? (
+                                            <>
+                                                <span>Sending...</span>
+                                                <motion.div
+                                                    animate={{ rotate: 360 }}
+                                                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                                >
+                                                    <Mail size={18} />
+                                                </motion.div>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <span>Send Message</span>
+                                                <Mail size={18} />
+                                            </>
+                                        )}
                                     </motion.button>
                                 </form>
                             </CardContent>
