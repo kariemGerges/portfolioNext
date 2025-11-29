@@ -69,9 +69,9 @@ export default function BlogTeaser() {
     return (
         <section 
             id="blog" 
-            className="relative py-20 lg:py-32 overflow-hidden"
+            className="relative py-12 sm:py-16 md:py-20 lg:py-32 overflow-hidden"
         >
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
@@ -81,13 +81,13 @@ export default function BlogTeaser() {
                         duration: prefersReducedMotion ? 0 : 0.8, 
                         ease: [0.16, 1, 0.3, 1] 
                     }}
-                    className="mb-16 lg:mb-24"
+                    className="mb-10 sm:mb-12 md:mb-16 lg:mb-24"
                 >
-                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-8">
+                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
                         <div>
                             <div className="overflow-hidden">
                                 <motion.h2
-                                    className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-6 tracking-tight"
+                                    className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light mb-4 sm:mb-6 tracking-tight"
                                     initial={{ opacity: 0, y: 50 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -97,11 +97,11 @@ export default function BlogTeaser() {
                                         ease: [0.16, 1, 0.3, 1] 
                                     }}
                                 >
-                                    Latest <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Insights</span>
+                                    Latest <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Insights</span>
                                 </motion.h2>
                             </div>
                             <motion.p
-                                className="text-xl sm:text-2xl text-gray-600 font-light max-w-2xl"
+                                className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 font-light max-w-2xl"
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -122,7 +122,7 @@ export default function BlogTeaser() {
                         >
                             <Link
                                 href="/pages/blog"
-                                className="group inline-flex items-center gap-2 text-lg text-amber-600 hover:text-orange-600 transition-colors"
+                                className="group inline-flex items-center gap-2 text-base sm:text-lg text-amber-400 hover:text-orange-400 transition-colors"
                             >
                                 <span>View All</span>
                                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
@@ -134,14 +134,14 @@ export default function BlogTeaser() {
                 {/* Blog Posts Grid */}
                 {loading ? (
                     <div className="text-center py-12">
-                        <p className="text-gray-600">Loading latest posts...</p>
+                        <p className="text-gray-300">Loading latest posts...</p>
                     </div>
                 ) : featuredPosts.length === 0 ? (
                     <div className="text-center py-12">
-                        <p className="text-gray-600">No blog posts yet. Check back soon!</p>
+                        <p className="text-gray-300">No blog posts yet. Check back soon!</p>
                     </div>
                 ) : (
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                         {featuredPosts.map((post, index) => {
                             const categoryName = post.categories && post.categories.length > 0 
                                 ? post.categories[0].name 
@@ -161,34 +161,36 @@ export default function BlogTeaser() {
                                         delay: prefersReducedMotion ? 0 : index * 0.15,
                                         ease: [0.16, 1, 0.3, 1] 
                                     }}
-                                    className="group"
-                                    whileHover={prefersReducedMotion ? {} : { y: -8 }}
+                                    className="group h-full"
+                                    whileHover={prefersReducedMotion ? {} : { y: -8, scale: 1.02 }}
                                 >
-                                    <Link href={`/pages/blog/${post.slug || post._id}`}>
-                                        <div className="h-full space-y-4">
-                                            {/* Category */}
-                                            <motion.div
-                                                className="text-sm bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent font-light uppercase tracking-wide"
-                                                initial={{ opacity: 0 }}
-                                                whileInView={{ opacity: 1 }}
-                                                viewport={{ once: true }}
-                                                transition={{ delay: prefersReducedMotion ? 0 : index * 0.15 + 0.2 }}
-                                            >
-                                                {categoryName}
-                                            </motion.div>
+                                    <Link href={`/pages/blog/${post.slug || post._id}`} className="h-full block">
+                                        <div className="h-full bg-gradient-to-br from-amber-900/20 to-orange-900/30 rounded-xl p-4 sm:p-5 lg:p-6 flex flex-col">
+                                            <div className="flex flex-col space-y-3 sm:space-y-4 flex-grow">
+                                                {/* Category */}
+                                                <motion.div
+                                                    className="text-xs sm:text-sm bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent font-light uppercase tracking-wide"
+                                                    initial={{ opacity: 0 }}
+                                                    whileInView={{ opacity: 1 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ delay: prefersReducedMotion ? 0 : index * 0.15 + 0.2 }}
+                                                >
+                                                    {categoryName}
+                                                </motion.div>
 
-                                            {/* Title */}
-                                            <h3 className="text-2xl sm:text-3xl font-light tracking-tight group-hover:bg-gradient-to-r group-hover:from-amber-600 group-hover:to-orange-600 group-hover:bg-clip-text group-hover:text-transparent transition-all">
-                                                {post.title}
-                                            </h3>
+                                                {/* Title */}
+                                                <h3 className="text-xl sm:text-2xl lg:text-3xl font-light tracking-tight text-white group-hover:bg-gradient-to-r group-hover:from-amber-400 group-hover:to-orange-400 group-hover:bg-clip-text group-hover:text-transparent transition-all">
+                                                    {post.title}
+                                                </h3>
 
-                                            {/* Excerpt */}
-                                            <p className="text-base text-gray-600 font-light leading-relaxed line-clamp-3">
-                                                {excerpt}
-                                            </p>
+                                                {/* Excerpt */}
+                                                <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed line-clamp-3 flex-grow">
+                                                    {excerpt}
+                                                </p>
+                                            </div>
 
-                                            {/* Meta Info */}
-                                            <div className="flex items-center gap-4 text-sm text-gray-500 pt-4 border-t border-gray-200">
+                                            {/* Meta Info - Footer */}
+                                            <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-400 pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-gray-700">
                                                 <div className="flex items-center gap-1.5">
                                                     <Calendar className="w-4 h-4" />
                                                     <time dateTime={postDate}>

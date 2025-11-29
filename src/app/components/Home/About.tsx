@@ -23,9 +23,9 @@ export default function About() {
     return (
         <section 
             id="about" 
-            className="relative py-20 lg:py-32 overflow-hidden"
+            className="relative py-12 sm:py-16 md:py-20 lg:py-32 overflow-hidden"
         >
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header with text reveal */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
@@ -35,11 +35,11 @@ export default function About() {
                         duration: prefersReducedMotion ? 0 : 0.8, 
                         ease: [0.16, 1, 0.3, 1] 
                     }}
-                    className="text-center mb-16 lg:mb-24"
+                    className="text-center mb-10 sm:mb-12 md:mb-16 lg:mb-24"
                 >
                     <div className="overflow-hidden">
                         <motion.h2
-                            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-6 tracking-tight"
+                            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light mb-4 sm:mb-6 tracking-tight"
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -49,11 +49,11 @@ export default function About() {
                                 ease: [0.16, 1, 0.3, 1] 
                             }}
                         >
-                            <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">About</span>
+                            <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">About</span>
                         </motion.h2>
                     </div>
                     <motion.p
-                        className="text-xl sm:text-2xl text-gray-600 font-light max-w-2xl mx-auto"
+                        className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 font-light max-w-2xl mx-auto px-2"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -67,7 +67,7 @@ export default function About() {
                     </motion.p>
                 </motion.div>
 
-                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+                <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24 items-start">
                     {/* Left Column - Story with staggered text */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
@@ -77,7 +77,7 @@ export default function About() {
                             duration: prefersReducedMotion ? 0 : 0.8, 
                             ease: [0.16, 1, 0.3, 1] 
                         }}
-                        className="space-y-6 text-lg sm:text-xl text-gray-600 font-light leading-relaxed"
+                        className="space-y-4 sm:space-y-5 lg:space-y-6 text-base sm:text-lg lg:text-xl text-gray-200 font-light leading-relaxed"
                     >
                         {[
                             "With over 5 years of experience in enterprise software development, I specialize in architecting scalable systems that deliver measurable business value and exceptional user experiences.",
@@ -95,11 +95,11 @@ export default function About() {
                                     delay: prefersReducedMotion ? 0 : index * 0.1,
                                     ease: [0.16, 1, 0.3, 1] 
                                 }}
-                                className={index === 0 ? "font-normal text-black" : index === 3 ? "text-amber-600 font-medium" : ""}
+                                className={index === 0 ? "font-normal text-white" : index === 3 ? "text-amber-400 font-medium" : ""}
                             >
                                 {index === 0 ? (
                                     <>
-                                        With over <span className="font-semibold text-amber-600">5 years</span> of experience in enterprise software development, I specialize in architecting scalable systems that deliver measurable business value and exceptional user experiences.
+                                        With over <span className="font-semibold text-amber-400">5 years</span> of experience in enterprise software development, I specialize in architecting scalable systems that deliver measurable business value and exceptional user experiences.
                                     </>
                                 ) : (
                                     text
@@ -119,7 +119,7 @@ export default function About() {
                                 duration: prefersReducedMotion ? 0 : 0.8, 
                                 ease: [0.16, 1, 0.3, 1] 
                             }}
-                            className="grid grid-cols-2 gap-6"
+                            className="grid grid-cols-2 gap-4 sm:gap-6"
                         >
                             {stats.map((stat, index) => (
                                 <motion.div
@@ -136,7 +136,7 @@ export default function About() {
                                     whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                                 >
                                     <motion.div
-                                        className="text-5xl sm:text-6xl font-light mb-2 bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent"
+                                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-1 sm:mb-2 bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent"
                                         initial={{ opacity: 0 }}
                                         whileInView={{ opacity: 1 }}
                                         viewport={{ once: true }}
@@ -144,7 +144,7 @@ export default function About() {
                                     >
                                         {stat.value}
                                     </motion.div>
-                                    <div className="text-sm text-gray-600 font-light">
+                                    <div className="text-xs sm:text-sm text-gray-300 font-light">
                                         {stat.label}
                                     </div>
                                 </motion.div>
@@ -161,18 +161,18 @@ export default function About() {
                                 delay: prefersReducedMotion ? 0 : 0.2,
                                 ease: [0.16, 1, 0.3, 1] 
                             }}
-                            className="pt-8 border-t border-gray-200"
+                            className="pt-8 border-t border-gray-700"
                         >
                             <motion.h3
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: prefersReducedMotion ? 0 : 0.3 }}
-                                className="text-3xl sm:text-4xl font-light mb-8 tracking-tight"
+                                className="text-2xl sm:text-3xl lg:text-4xl font-light mb-6 sm:mb-8 tracking-tight"
                             >
                                 Technical Expertise
                             </motion.h3>
-                            <div className="space-y-6">
+                            <div className="space-y-4 sm:space-y-5 lg:space-y-6">
                                 {skills.map((skill, index) => (
                                     <motion.div
                                         key={skill.name}
@@ -185,15 +185,15 @@ export default function About() {
                                             ease: [0.16, 1, 0.3, 1] 
                                         }}
                                     >
-                                        <div className="flex justify-between items-center mb-2">
-                                            <span className="text-base text-gray-700 font-light">
+                                        <div className="flex justify-between items-center mb-1.5 sm:mb-2">
+                                            <span className="text-sm sm:text-base text-gray-200 font-light">
                                                 {skill.name}
                                             </span>
-                                            <span className="text-sm text-gray-500 font-light">
+                                            <span className="text-xs sm:text-sm text-gray-400 font-light">
                                                 {skill.level}%
                                             </span>
                                         </div>
-                                        <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                        <div className="h-1 bg-gray-800 rounded-full overflow-hidden">
                                             <motion.div
                                                 initial={{ width: 0 }}
                                                 whileInView={{ width: `${skill.level}%` }}
@@ -203,7 +203,7 @@ export default function About() {
                                                     delay: prefersReducedMotion ? 0 : index * 0.1 + 0.5,
                                                     ease: [0.16, 1, 0.3, 1] 
                                                 }}
-                                                className="h-full bg-gradient-to-r from-amber-600 to-orange-600 rounded-full"
+                                                className="h-full bg-gradient-to-r from-amber-400 to-orange-400 rounded-full"
                                                 style={{ willChange: 'width' }}
                                             />
                                         </div>

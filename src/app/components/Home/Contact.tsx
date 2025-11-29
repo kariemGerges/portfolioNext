@@ -60,9 +60,9 @@ export default function Contact() {
     return (
         <section 
             id="contact" 
-            className="relative py-20 lg:py-32 overflow-hidden"
+            className="relative py-12 sm:py-16 md:py-20 lg:py-32 overflow-hidden"
         >
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
@@ -72,11 +72,11 @@ export default function Contact() {
                         duration: prefersReducedMotion ? 0 : 0.8, 
                         ease: [0.16, 1, 0.3, 1] 
                     }}
-                    className="text-center mb-16 lg:mb-24"
+                    className="text-center mb-10 sm:mb-12 md:mb-16 lg:mb-24"
                 >
                     <div className="overflow-hidden">
                         <motion.h2
-                            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-6 tracking-tight"
+                            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light mb-4 sm:mb-6 tracking-tight"
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -86,11 +86,11 @@ export default function Contact() {
                                 ease: [0.16, 1, 0.3, 1] 
                             }}
                         >
-                            Get in <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Touch</span>
+                            Get in <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Touch</span>
                         </motion.h2>
                     </div>
                     <motion.p
-                        className="text-xl sm:text-2xl text-gray-600 font-light max-w-2xl mx-auto"
+                        className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 font-light max-w-2xl mx-auto px-2"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -104,7 +104,7 @@ export default function Contact() {
                     </motion.p>
                 </motion.div>
 
-                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+                <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-20 xl:gap-24">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -113,7 +113,7 @@ export default function Contact() {
                             duration: prefersReducedMotion ? 0 : 0.8, 
                             ease: [0.16, 1, 0.3, 1] 
                         }}
-                        className="space-y-8"
+                        className="space-y-6 sm:space-y-8"
                     >
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -121,12 +121,12 @@ export default function Contact() {
                             viewport={{ once: true }}
                             transition={{ delay: prefersReducedMotion ? 0 : 0.2 }}
                         >
-                            <p className="text-sm text-gray-500 mb-3 font-light uppercase tracking-wide">
+                            <p className="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-3 font-light uppercase tracking-wide">
                                 Email
                             </p>
                             <a
                                 href="mailto:kariem.gerges@outlook.com"
-                                className="text-2xl sm:text-3xl font-light bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity inline-block break-all"
+                                className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity inline-block break-all"
                             >
                                 kariem.gerges@outlook.com
                             </a>
@@ -137,10 +137,10 @@ export default function Contact() {
                             viewport={{ once: true }}
                             transition={{ delay: prefersReducedMotion ? 0 : 0.4 }}
                         >
-                            <p className="text-sm text-gray-500 mb-4 font-light uppercase tracking-wide">
+                            <p className="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-4 font-light uppercase tracking-wide">
                                 Connect
                             </p>
-                            <div className="flex gap-3">
+                            <div className="flex gap-2 sm:gap-3">
                                 {[
                                     { href: 'https://github.com/kariemGerges', icon: Github },
                                     { href: 'https://www.linkedin.com/in/kariem-gerges-458294195/', icon: Linkedin },
@@ -153,7 +153,7 @@ export default function Contact() {
                                             href={social.href}
                                             target={social.href.startsWith('mailto:') ? undefined : '_blank'}
                                             rel={social.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                                            className="p-3 rounded-full bg-gradient-to-br from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 transition-all border border-amber-100"
+                                            className="p-3 rounded-full bg-gradient-to-br from-amber-900/30 to-orange-900/30 hover:from-amber-800/40 hover:to-orange-800/40 transition-all border border-amber-800/50"
                                             initial={{ opacity: 0, scale: 0.8 }}
                                             whileInView={{ opacity: 1, scale: 1 }}
                                             viewport={{ once: true }}
@@ -161,7 +161,7 @@ export default function Contact() {
                                             whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
                                             whileTap={{ scale: 0.95 }}
                                         >
-                                            <Icon size={20} className="text-amber-600" />
+                                            <Icon size={20} className="text-amber-400" />
                                         </motion.a>
                                     );
                                 })}
@@ -169,7 +169,7 @@ export default function Contact() {
                         </motion.div>
                         
                         {/* Illustration */}
-                        <motion.div
+                        {/* <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -184,7 +184,9 @@ export default function Contact() {
                                     className="object-contain"
                                 />
                             </div>
-                        </motion.div>
+                        </motion.div> */}
+
+                        
                     </motion.div>
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
@@ -196,11 +198,11 @@ export default function Contact() {
                             ease: [0.16, 1, 0.3, 1] 
                         }}
                     >
-                        <Card className="border border-gray-200 shadow-sm">
-                            <CardContent className="p-8">
+                        <Card className="border border-gray-700 bg-gray-900/30 backdrop-blur-sm shadow-sm">
+                            <CardContent className="p-5 sm:p-6 lg:p-8">
                                 <form
                                     onSubmit={handleSubmit}
-                                    className="space-y-6"
+                                    className="space-y-4 sm:space-y-5 lg:space-y-6"
                                 >
                                     {[
                                         { id: 'name', label: 'Name', placeholder: 'Your name', type: 'text' },
@@ -215,7 +217,7 @@ export default function Contact() {
                                         >
                                         <label
                                                 htmlFor={field.id}
-                                                className="text-sm font-light text-gray-700 mb-2 block"
+                                                className="text-sm font-light text-gray-200 mb-2 block"
                                         >
                                                 {field.label}
                                         </label>
@@ -227,7 +229,7 @@ export default function Contact() {
                                             onChange={handleChange}
                                                 placeholder={field.placeholder}
                                             required
-                                                className="bg-white border-gray-300 focus:border-amber-600 focus:ring-amber-600 h-12 text-base transition-all"
+                                                className="bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-amber-400 focus:ring-amber-400 h-12 text-base transition-all"
                                             />
                                         </motion.div>
                                     ))}
@@ -239,7 +241,7 @@ export default function Contact() {
                                     >
                                         <label
                                             htmlFor="message"
-                                            className="text-sm font-light text-gray-700 mb-2 block"
+                                            className="text-sm font-light text-gray-200 mb-2 block"
                                         >
                                             Message
                                         </label>
@@ -251,13 +253,13 @@ export default function Contact() {
                                             placeholder="Tell me about your project..."
                                             rows={6}
                                             required
-                                            className="bg-white border-gray-300 focus:border-amber-600 focus:ring-amber-600 resize-none text-base transition-all"
+                                            className="bg-gray-800/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-amber-400 focus:ring-amber-400 resize-none text-base transition-all"
                                         />
                                     </motion.div>
                                     <motion.button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-lg font-light text-base hover:shadow-xl transition-all min-h-[44px] touch-manipulation disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-lg font-light text-base hover:shadow-xl transition-all min-h-[44px] touch-manipulation disabled:opacity-50 disabled:cursor-not-allowed"
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}

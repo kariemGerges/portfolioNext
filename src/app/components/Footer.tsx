@@ -37,7 +37,7 @@ export const Footer: React.FC<PortfolioFooterProps> = ({ ownerName }) => {
     ];
 
     return (
-        <footer className="relative bg-white border-t border-gray-200 overflow-hidden">
+        <footer className="relative bg-black/80 backdrop-blur-sm border-t border-gray-800 overflow-hidden">
             <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
                     {/* Brand Section */}
@@ -51,10 +51,10 @@ export const Footer: React.FC<PortfolioFooterProps> = ({ ownerName }) => {
                         }}
                         className="md:col-span-4"
                     >
-                        <h3 className="text-2xl font-light mb-4 bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent tracking-tight">
+                        <h3 className="text-2xl font-light mb-4 bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent tracking-tight">
                             {ownerName}
                         </h3>
-                        <p className="text-base text-gray-600 font-light leading-relaxed mb-6">
+                        <p className="text-base text-gray-300 font-light leading-relaxed mb-6">
                             Crafting enterprise solutions that combine robust engineering 
                             with intuitive design, delivering measurable business impact.
                         </p>
@@ -80,9 +80,9 @@ export const Footer: React.FC<PortfolioFooterProps> = ({ ownerName }) => {
                                         }}
                                         whileHover={{ scale: 1.1, rotate: 5 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="p-3 rounded-full bg-gradient-to-br from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 transition-all border border-amber-100"
+                                        className="p-3 rounded-full bg-gradient-to-br from-amber-900/30 to-orange-900/30 hover:from-amber-800/40 hover:to-orange-800/40 transition-all border border-amber-800/50"
                                     >
-                                        <Icon className="w-5 h-5 text-amber-600" />
+                                        <Icon className="w-5 h-5 text-amber-400" />
                                     </motion.a>
                                 );
                             })}
@@ -101,7 +101,7 @@ export const Footer: React.FC<PortfolioFooterProps> = ({ ownerName }) => {
                         }}
                         className="md:col-span-4"
                     >
-                        <h4 className="text-sm font-light text-black uppercase tracking-wide mb-6">
+                        <h4 className="text-sm font-light text-amber-400 text-bold uppercase tracking-wide mb-6">
                             Navigation
                         </h4>
                         <nav className="space-y-4">
@@ -118,7 +118,7 @@ export const Footer: React.FC<PortfolioFooterProps> = ({ ownerName }) => {
                                 >
                                     <Link
                                         href={link.href}
-                                        className="block text-base text-gray-600 hover:bg-gradient-to-r hover:from-amber-600 hover:to-orange-600 hover:bg-clip-text hover:text-transparent font-light transition-all duration-300"
+                                        className="block text-base text-gray-300 hover:bg-gradient-to-r hover:from-amber-400 hover:to-orange-400 hover:bg-clip-text hover:text-transparent font-light transition-all duration-300"
                                     >
                                         {link.label}
                                     </Link>
@@ -139,17 +139,17 @@ export const Footer: React.FC<PortfolioFooterProps> = ({ ownerName }) => {
                         }}
                         className="md:col-span-4"
                     >
-                        <h4 className="text-sm font-light text-black uppercase tracking-wide mb-6">
+                        <h4 className="text-sm font-light text-amber-400 text-bold uppercase tracking-wide mb-6">
                             Contact
                         </h4>
                         <div className="space-y-4">
                             <a
                                 href="mailto:kariem.gerges@outlook.com"
-                                className="block text-base text-gray-600 hover:bg-gradient-to-r hover:from-amber-600 hover:to-orange-600 hover:bg-clip-text hover:text-transparent font-light transition-all duration-300 break-all"
+                                className="block text-base text-gray-300 hover:bg-gradient-to-r hover:from-amber-400 hover:to-orange-400 hover:bg-clip-text hover:text-transparent font-light transition-all duration-300 break-all"
                             >
                                 kariem.gerges@outlook.com
                             </a>
-                            <p className="text-sm text-gray-500 font-light leading-relaxed">
+                            <p className="text-sm text-gray-400 font-light leading-relaxed">
                                 Available for enterprise projects and strategic consulting engagements.
                             </p>
                         </div>
@@ -157,7 +157,7 @@ export const Footer: React.FC<PortfolioFooterProps> = ({ ownerName }) => {
                 </div>
 
                 {/* Bottom Section */}
-                <div className="pt-8 border-t border-gray-200">
+                <div className="pt-8 border-t border-gray-800">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                         <motion.div
                             initial={{ opacity: 0 }}
@@ -167,7 +167,7 @@ export const Footer: React.FC<PortfolioFooterProps> = ({ ownerName }) => {
                                 duration: 0.6,
                                 ease: [0.16, 1, 0.3, 1]
                             }}
-                            className="text-sm text-gray-500 font-light"
+                            className="text-sm text-gray-400 font-light"
                         >
                             &copy; {currentYear} {ownerName}. All rights reserved.
                         </motion.div>
@@ -180,7 +180,7 @@ export const Footer: React.FC<PortfolioFooterProps> = ({ ownerName }) => {
                                 delay: 0.2,
                                 ease: [0.16, 1, 0.3, 1]
                             }}
-                            className="text-sm text-gray-500 font-light"
+                            className="text-sm text-gray-400 font-light"
                         >
                             Built with Next.js & TypeScript
                         </motion.div>

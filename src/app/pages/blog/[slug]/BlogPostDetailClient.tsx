@@ -10,7 +10,7 @@ import ArticleLoading from '@/app/components/ArticleLoading';
 interface BlogPost {
     _id: string;
     title: string;
-    body: string | { content?: string; excerpt?: string };
+    body: string | { content?: string; excerpt?: string; introduction?: string; [key: string]: any };
     date: string;
     slug: string;
     author: string;
@@ -23,7 +23,7 @@ interface BlogPostDetailClientProps {
 }
 
 // Helper function to calculate read time
-function calculateReadTime(body: string | { content?: string; excerpt?: string }): string {
+function calculateReadTime(body: string | { content?: string; excerpt?: string; introduction?: string; [key: string]: any }): string {
     const text = typeof body === 'string' ? body : body.content || body.excerpt || '';
     const wordsPerMinute = 200;
     const words = text.split(/\s+/).length;
@@ -43,7 +43,7 @@ function isStructuredContent(body: any): boolean {
 }
 
 // Helper function to render body content
-function renderBody(body: string | { content?: string; excerpt?: string } | any): any {
+function renderBody(body: string | { content?: string; excerpt?: string; introduction?: string; [key: string]: any } | any): any {
     if (!body) {
         return null;
     }
@@ -173,6 +173,66 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
         ? new Date(post.date).toISOString() 
         : new Date().toISOString();
 
+    // Get base URL (works in client component)
+    const baseUrl = typeof window !== 'undefined' 
+        ? window.location.origin 
+        : (process.env.NEXT_PUBLIC_SITE_URL || "https://kariemgerges.com");
+
+    // Structured data for Article schema
+    const articleStructuredData = post ? {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": post.title,
+        "description": typeof post.body === 'string' 
+            ? post.body.substring(0, 200).replace(/[#*]/g, '').trim()
+            : (post.body?.excerpt || post.body?.introduction || ''),
+        "image": post.image ? (post.image.startsWith('http') ? post.image : `${baseUrl}${post.image}`) : undefined,
+        "datePublished": post.date,
+        "dateModified": post.date,
+        "author": {
+            "@type": "Person",
+            "name": post.author || "Kariem Gerges",
+            "url": baseUrl
+        },
+        "publisher": {
+            "@type": "Person",
+            "name": "Kariem Gerges",
+            "url": baseUrl
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `${baseUrl}/pages/blog/${post.slug || post._id}`
+        },
+        "articleSection": categoryName,
+        "keywords": post.categories?.map((cat: any) => cat.name).join(', ') || 'Software Engineering'
+    } : null;
+
+    // Breadcrumb structured data
+    const breadcrumbStructuredData = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": baseUrl
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": `${baseUrl}/pages/blog`
+            },
+            ...(post ? [{
+                "@type": "ListItem",
+                "position": 3,
+                "name": post.title,
+                "item": `${baseUrl}/pages/blog/${post.slug || post._id}`
+            }] : [])
+        ]
+    };
+
     // NOW we can have conditional returns - all hooks have been called
     if (loading) {
         return <ArticleLoading />;
@@ -183,10 +243,21 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
     }
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-black text-white">
+            {/* Structured Data */}
+            {articleStructuredData && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData) }}
+                />
+            )}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+            />
             {/* Header Section */}
             <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 lg:pt-40 lg:pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-transparent pointer-events-none" />
                 
                 <div className="max-w-4xl mx-auto relative z-10">
                     <motion.div
@@ -196,27 +267,27 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
                     >
                         <Link
                             href="/pages/blog"
-                            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors mb-6"
+                            className="inline-flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors mb-6"
                         >
                             <ArrowLeft size={16} />
                             <span>Back to Blog</span>
                         </Link>
 
                         {/* Category Badge */}
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-200 mb-6">
-                            <BookOpen className="w-4 h-4 text-amber-700" />
-                            <p className="text-xs sm:text-sm text-gray-600 tracking-wide uppercase font-medium">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900/50 backdrop-blur-sm rounded-full border border-gray-700 shadow-sm mb-6">
+                            <BookOpen className="w-4 h-4 text-amber-400" />
+                            <p className="text-xs sm:text-sm text-gray-300 tracking-wide uppercase font-medium">
                                 {categoryName}
                             </p>
                         </div>
 
                         {/* Title */}
-                        <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light leading-[1.1] mb-6 sm:mb-8 tracking-tight">
+                        <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light leading-[1.1] mb-6 sm:mb-8 tracking-tight text-white">
                             {post.title}
                         </h1>
 
                         {/* Meta Info */}
-                        <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-gray-600 pb-6 border-b border-gray-200">
+                        <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-gray-300 pb-6 border-b border-gray-700">
                             <div className="flex items-center gap-2">
                                 <User className="w-4 h-4" />
                                 <span>{post.author}</span>
@@ -270,28 +341,28 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
                         className="article-content"
                     >
                         {bodyContent ? (
-                            <div className="prose prose-lg prose-slate max-w-none 
-                                prose-headings:font-light prose-headings:text-gray-900 prose-headings:tracking-tight
-                                prose-h1:text-4xl prose-h1:sm:text-5xl prose-h1:mb-6 prose-h1:mt-12
-                                prose-h2:text-3xl prose-h2:sm:text-4xl prose-h2:mb-4 prose-h2:mt-10 prose-h2:text-gray-800
-                                prose-h3:text-2xl prose-h3:sm:text-3xl prose-h3:mb-3 prose-h3:mt-8 prose-h3:text-gray-700
-                                prose-p:text-gray-700 prose-p:font-light prose-p:leading-relaxed prose-p:mb-6 prose-p:text-base prose-p:sm:text-lg
-                                prose-a:text-amber-700 prose-a:no-underline hover:prose-a:underline prose-a:transition-all
-                                prose-strong:text-gray-900 prose-strong:font-medium
-                                prose-ul:my-6 prose-ul:space-y-2 prose-li:text-gray-700 prose-li:font-light prose-li:text-base prose-li:sm:text-lg
-                                prose-ol:my-6 prose-ol:space-y-2
-                                prose-blockquote:border-l-4 prose-blockquote:border-amber-700 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600 prose-blockquote:my-8
-                                prose-code:text-amber-800 prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
-                                prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:rounded-lg prose-pre:p-6 prose-pre:overflow-x-auto
-                                prose-img:rounded-lg prose-img:shadow-lg prose-img:my-8
-                                prose-hr:border-gray-200 prose-hr:my-12">
+                            <div className="prose prose-lg prose-invert max-w-none 
+                                prose-headings:font-light prose-headings:text-white prose-headings:tracking-tight
+                                prose-h1:text-4xl prose-h1:sm:text-5xl prose-h1:mb-6 prose-h1:mt-12 prose-h1:text-white
+                                prose-h2:text-3xl prose-h2:sm:text-4xl prose-h2:mb-4 prose-h2:mt-10 prose-h2:text-gray-200
+                                prose-h3:text-2xl prose-h3:sm:text-3xl prose-h3:mb-3 prose-h3:mt-8 prose-h3:text-gray-300
+                                prose-p:text-gray-300 prose-p:font-light prose-p:leading-relaxed prose-p:mb-6 prose-p:text-base prose-p:sm:text-lg
+                                prose-a:text-amber-400 prose-a:no-underline hover:prose-a:underline prose-a:transition-all hover:prose-a:text-orange-400
+                                prose-strong:text-white prose-strong:font-medium
+                                prose-ul:my-6 prose-ul:space-y-2 prose-li:text-gray-300 prose-li:font-light prose-li:text-base prose-li:sm:text-lg
+                                prose-ol:my-6 prose-ol:space-y-2 prose-ol:text-gray-300
+                                prose-blockquote:border-l-4 prose-blockquote:border-amber-400 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-300 prose-blockquote:my-8 prose-blockquote:bg-gray-900/30 prose-blockquote:py-2 prose-blockquote:rounded-r
+                                prose-code:text-amber-300 prose-code:bg-gray-900/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:border prose-code:border-gray-700
+                                prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:rounded-lg prose-pre:p-6 prose-pre:overflow-x-auto prose-pre:border prose-pre:border-gray-700
+                                prose-img:rounded-lg prose-img:shadow-lg prose-img:my-8 prose-img:border prose-img:border-gray-700
+                                prose-hr:border-gray-700 prose-hr:my-12">
                                 {/* Render structured content */}
                                 {isStructured ? (
                                     <div className="article-body">
                                         {/* Introduction */}
                                         {bodyContent.introduction && (
                                             <div className="mb-12">
-                                                <p className="text-xl sm:text-2xl text-gray-700 font-light leading-relaxed mb-6">
+                                                <p className="text-xl sm:text-2xl text-gray-200 font-light leading-relaxed mb-6">
                                                     {bodyContent.introduction}
                                                 </p>
                                             </div>
@@ -306,7 +377,7 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
                                                 <div key={num} className="mb-16">
                                                     {/* Section Title */}
                                                     {section.title && (
-                                                        <h2 className="text-3xl sm:text-4xl font-light text-gray-800 tracking-tight mb-6 mt-10 first:mt-0">
+                                                        <h2 className="text-3xl sm:text-4xl font-light text-white tracking-tight mb-6 mt-10 first:mt-0">
                                                             {section.title}
                                                         </h2>
                                                     )}
@@ -328,7 +399,7 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
                                                                 const trimmed = paragraph.trim();
                                                                 if (!trimmed) return null;
                                                                 return (
-                                                                    <p key={pIndex} className="text-base sm:text-lg text-gray-700 font-light leading-relaxed">
+                                                                    <p key={pIndex} className="text-base sm:text-lg text-gray-300 font-light leading-relaxed">
                                                                         {trimmed}
                                                                     </p>
                                                                 );
@@ -341,8 +412,8 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
                                         
                                         {/* Conclusion */}
                                         {bodyContent.conclusion && bodyContent.conclusion.content && (
-                                            <div className="mt-12 pt-8 border-t border-gray-200">
-                                                <h3 className="text-2xl sm:text-3xl font-light text-gray-700 tracking-tight mb-6">
+                                            <div className="mt-12 pt-8 border-t border-gray-700">
+                                                <h3 className="text-2xl sm:text-3xl font-light text-white tracking-tight mb-6">
                                                     Conclusion
                                                 </h3>
                                                 <div className="space-y-4">
@@ -350,7 +421,7 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
                                                         const trimmed = paragraph.trim();
                                                         if (!trimmed) return null;
                                                         return (
-                                                            <p key={pIndex} className="text-base sm:text-lg text-gray-700 font-light leading-relaxed">
+                                                            <p key={pIndex} className="text-base sm:text-lg text-gray-300 font-light leading-relaxed">
                                                                 {trimmed}
                                                             </p>
                                                         );
@@ -373,11 +444,11 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
                                                 
                                                 // Check if it's a heading
                                                 if (trimmed.startsWith('# ')) {
-                                                    return <h1 key={index} className="text-4xl sm:text-5xl font-light text-gray-900 tracking-tight mb-6 mt-12 first:mt-0">{trimmed.substring(2).trim()}</h1>;
+                                                    return <h1 key={index} className="text-4xl sm:text-5xl font-light text-white tracking-tight mb-6 mt-12 first:mt-0">{trimmed.substring(2).trim()}</h1>;
                                                 } else if (trimmed.startsWith('## ')) {
-                                                    return <h2 key={index} className="text-3xl sm:text-4xl font-light text-gray-800 tracking-tight mb-4 mt-10">{trimmed.substring(3).trim()}</h2>;
+                                                    return <h2 key={index} className="text-3xl sm:text-4xl font-light text-gray-200 tracking-tight mb-4 mt-10">{trimmed.substring(3).trim()}</h2>;
                                                 } else if (trimmed.startsWith('### ')) {
-                                                    return <h3 key={index} className="text-2xl sm:text-3xl font-light text-gray-700 tracking-tight mb-3 mt-8">{trimmed.substring(4).trim()}</h3>;
+                                                    return <h3 key={index} className="text-2xl sm:text-3xl font-light text-gray-300 tracking-tight mb-3 mt-8">{trimmed.substring(4).trim()}</h3>;
                                                 } else if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
                                                     // List item
                                                     const items = paragraph.split('\n').filter(line => {
@@ -385,7 +456,7 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
                                                         return lineTrimmed.startsWith('- ') || lineTrimmed.startsWith('* ');
                                                     });
                                                     return (
-                                                        <ul key={index} className="list-disc list-inside space-y-2 my-6 text-gray-700 font-light text-base sm:text-lg">
+                                                        <ul key={index} className="list-disc list-inside space-y-2 my-6 text-gray-300 font-light text-base sm:text-lg">
                                                             {items.map((item, itemIndex) => (
                                                                 <li key={itemIndex}>{item.replace(/^[-*]\s+/, '').trim()}</li>
                                                             ))}
@@ -393,14 +464,14 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
                                                     );
                                                 } else {
                                                     return (
-                                                        <p key={index} className="text-base sm:text-lg text-gray-700 font-light leading-relaxed mb-6">
+                                                        <p key={index} className="text-base sm:text-lg text-gray-300 font-light leading-relaxed mb-6">
                                                             {trimmed}
                                                         </p>
                                                     );
                                                 }
                                             })
                                         ) : (
-                                            <p className="text-base sm:text-lg text-gray-700 font-light leading-relaxed mb-6">
+                                            <p className="text-base sm:text-lg text-gray-300 font-light leading-relaxed mb-6">
                                                 {String(bodyContent)}
                                             </p>
                                         )}
@@ -409,12 +480,12 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
                             </div>
                         ) : (
                             <div className="text-center py-12">
-                                <p className="text-gray-500 italic text-lg mb-4">No content available for this post.</p>
+                                <p className="text-gray-400 italic text-lg mb-4">No content available for this post.</p>
                                 <details className="mt-4 text-left max-w-2xl mx-auto">
-                                    <summary className="text-sm text-gray-400 cursor-pointer hover:text-gray-600 transition-colors">
+                                    <summary className="text-sm text-gray-400 cursor-pointer hover:text-amber-400 transition-colors">
                                         Debug: View raw body data
                                     </summary>
-                                    <pre className="mt-4 text-xs bg-gray-50 border border-gray-200 p-4 rounded-lg overflow-auto max-h-96">
+                                    <pre className="mt-4 text-xs bg-gray-900/50 border border-gray-700 text-gray-300 p-4 rounded-lg overflow-auto max-h-96">
                                         {JSON.stringify(post.body, null, 2)}
                                     </pre>
                                 </details>
@@ -429,7 +500,7 @@ export default function BlogPostDetailClient({ slug }: BlogPostDetailClientProps
                 <div className="max-w-4xl mx-auto">
                     <Link
                         href="/"
-                        className="group inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-black transition-colors"
+                        className="group inline-flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-amber-400 transition-colors"
                     >
                         <ArrowLeft size={16} />
                         <span>Back to Home</span>

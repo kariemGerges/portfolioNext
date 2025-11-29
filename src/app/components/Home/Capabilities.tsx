@@ -54,9 +54,9 @@ export default function Capabilities() {
     return (
         <section 
             id="experience" 
-            className="relative py-20 lg:py-32 overflow-hidden"
+            className="relative py-12 sm:py-16 md:py-20 lg:py-32 overflow-hidden"
         >
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
@@ -66,11 +66,11 @@ export default function Capabilities() {
                         duration: prefersReducedMotion ? 0 : 0.8, 
                         ease: [0.16, 1, 0.3, 1] 
                     }}
-                    className="text-center mb-16 lg:mb-24"
+                    className="text-center mb-10 sm:mb-12 md:mb-16 lg:mb-24"
                 >
                     <div className="overflow-hidden">
                         <motion.h2
-                            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-6 tracking-tight"
+                            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light mb-4 sm:mb-6 tracking-tight"
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -80,11 +80,11 @@ export default function Capabilities() {
                                 ease: [0.16, 1, 0.3, 1] 
                             }}
                         >
-                            <span className="bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Expertise</span>
+                            <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Expertise</span>
                         </motion.h2>
                     </div>
                     <motion.p
-                        className="text-xl sm:text-2xl text-gray-600 font-light max-w-2xl mx-auto"
+                        className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 font-light max-w-2xl mx-auto px-2"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -98,7 +98,8 @@ export default function Capabilities() {
                     </motion.p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 
+                lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                     {capabilities.map((capability, index) => {
                         const Icon = capability.icon;
                         return (
@@ -112,25 +113,27 @@ export default function Capabilities() {
                                     delay: prefersReducedMotion ? 0 : index * 0.1,
                                     ease: [0.16, 1, 0.3, 1] 
                                 }}
-                                className="group"
+                                className="group 
+                                bg-gradient-to-br from-amber-900/20 to-orange-900/30 rounded-xl p-4 sm:p-5 lg:p-6
+"
                                 whileHover={prefersReducedMotion ? {} : { y: -8, scale: 1.02 }}
                             >
                                 <div className="mb-4">
                                     <motion.div
-                                        className="p-3 rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 w-fit mb-4 group-hover:from-amber-100 group-hover:to-orange-100 transition-all"
+                                        className="p-3 rounded-xl bg-gradient-to-br from-amber-900/30 to-orange-900/30 w-fit mb-4 group-hover:from-amber-800/40 group-hover:to-orange-800/40 transition-all"
                                         whileHover={prefersReducedMotion ? {} : { rotate: 5, scale: 1.1 }}
                                         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                                     >
-                                        <Icon className="w-6 h-6 text-amber-600" />
+                                        <Icon className="w-6 h-6 text-amber-400" />
                                     </motion.div>
-                                    <h3 className="text-2xl sm:text-3xl font-light mb-3 tracking-tight">
+                                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-light mb-2 sm:mb-3 tracking-tight">
                                         {capability.title}
                                     </h3>
-                                    <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-light mb-4">
+                                    <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed font-light mb-3 sm:mb-4">
                                         {capability.description}
                                     </p>
                                 </div>
-                                <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-200">
+                                <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-3 sm:pt-4 border-t border-gray-700">
                                     {capability.tech.map((tech, techIndex) => (
                                         <motion.span
                                             key={tech}
@@ -141,7 +144,7 @@ export default function Capabilities() {
                                                 delay: prefersReducedMotion ? 0 : index * 0.1 + techIndex * 0.05,
                                                 duration: 0.3
                                             }}
-                                            className="px-3 py-1 text-xs bg-gradient-to-r from-amber-50 to-orange-50 rounded-full text-gray-700 font-light border border-amber-100"
+                                            className="px-2 sm:px-3 py-0.5 sm:py-1 text-xs bg-gradient-to-r from-amber-900/30 to-orange-900/30 rounded-full text-gray-200 font-light border border-amber-800/50"
                                         >
                                             {tech}
                                         </motion.span>

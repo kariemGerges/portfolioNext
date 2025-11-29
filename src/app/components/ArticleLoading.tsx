@@ -6,11 +6,11 @@ export default function ArticleLoading() {
     const loadingDots = [0, 1, 2];
 
     return (
-        <div className="min-h-screen bg-white flex items-center justify-center px-6 py-24 relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden">
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 -right-32 w-96 h-96 bg-amber-200/20 blur-3xl rounded-full animate-pulse" />
-                <div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-orange-200/20 blur-3xl rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+                <div className="absolute top-1/4 -right-32 w-96 h-96 bg-amber-500/10 blur-3xl rounded-full animate-pulse" />
+                <div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-orange-500/10 blur-3xl rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
             </div>
 
             <div className="relative z-10 max-w-2xl mx-auto text-center">
@@ -41,9 +41,9 @@ export default function ArticleLoading() {
                                 repeat: Infinity,
                                 ease: "easeInOut"
                             }}
-                            className="relative bg-gradient-to-br from-amber-100 to-orange-100 rounded-full p-6 border-4 border-amber-200"
+                            className="relative bg-gradient-to-br from-amber-900/30 to-orange-900/30 rounded-full p-6 border-4 border-amber-800/50"
                         >
-                            <FileText className="w-16 h-16 text-amber-600" />
+                            <FileText className="w-16 h-16 text-amber-400" />
                         </motion.div>
                     </div>
                 </motion.div>
@@ -55,9 +55,9 @@ export default function ArticleLoading() {
                     transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                     className="mb-8"
                 >
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-4 text-gray-900">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-light mb-4 text-white">
                         Loading
-                        <span className="block bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+                        <span className="block bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
                             Article
                         </span>
                     </h2>
@@ -137,13 +137,13 @@ export default function ArticleLoading() {
                     className="max-w-2xl mx-auto space-y-4"
                 >
                     <div className="space-y-3">
-                        <div className="h-4 bg-gray-200 rounded w-3/4 mx-auto animate-pulse" />
-                        <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto animate-pulse" />
+                        <div className="h-4 bg-gray-700 rounded w-3/4 mx-auto animate-pulse" />
+                        <div className="h-4 bg-gray-700 rounded w-1/2 mx-auto animate-pulse" />
                     </div>
                     <div className="space-y-2 pt-4">
-                        <div className="h-3 bg-gray-100 rounded w-full animate-pulse" />
-                        <div className="h-3 bg-gray-100 rounded w-5/6 mx-auto animate-pulse" />
-                        <div className="h-3 bg-gray-100 rounded w-4/6 mx-auto animate-pulse" />
+                        <div className="h-3 bg-gray-800 rounded w-full animate-pulse" />
+                        <div className="h-3 bg-gray-800 rounded w-5/6 mx-auto animate-pulse" />
+                        <div className="h-3 bg-gray-800 rounded w-4/6 mx-auto animate-pulse" />
                     </div>
                 </motion.div>
             </div>

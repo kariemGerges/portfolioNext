@@ -27,7 +27,7 @@ const Contact = dynamic(() => import('@/app/components/Home/Contact'), {
 
 export default function PortfolioHome() {
     return (
-        <div className="bg-white text-black">
+        <div className="text-white">
             {/* Hero Section - Critical, load immediately */}
             <Hero />
             

@@ -1,0 +1,18 @@
+{
+  "name": "Kariem Gerges - Software Engineer & Product Designer",
+  "short_name": "Kariem Gerges",
+  "description": "Portfolio of Kariem Gerges - Software Engineer & Product Designer specializing in enterprise solutions",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#f59e0b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
+

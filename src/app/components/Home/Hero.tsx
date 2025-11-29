@@ -27,7 +27,7 @@ export default function Hero() {
     return (
         <section 
             ref={ref}
-            className="relative min-h-screen flex items-center justify-center px-6 lg:px-8 pt-20 pb-32 overflow-hidden"
+            className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-16 sm:pb-24 lg:pb-32 overflow-hidden"
             style={{ willChange: 'auto' }}
         >
             {/* Background Image */}
@@ -67,9 +67,9 @@ export default function Hero() {
             >
                 <div className="text-center">
                     {/* Main Heading - Apple Style with text reveal */}
-                    <div className="overflow-hidden mb-6">
+                    <div className="overflow-hidden mb-4 sm:mb-6">
                         <motion.h1
-                            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light leading-[1.05] tracking-tight m-2"
+                            className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-light leading-[1.05] tracking-tight m-1 sm:m-2"
                             initial={{ opacity: 0, y: 50 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ 
@@ -81,9 +81,25 @@ export default function Hero() {
                             Software Engineer
                         </motion.h1>
                     </div>
+                    <div className="overflow-hidden mb-4 sm:mb-6">
+                        <motion.h1
+                            className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl"
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ 
+                                duration: 1, 
+                                ease: [0.16, 1, 0.3, 1],
+                                delay: 0.2
+                            }}
+                        >
+                            &
+                        </motion.h1>
+                    </div>
                     <div className="overflow-hidden">
                         <motion.span
-                            className="block text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-normal bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400 bg-clip-text text-transparent pb-2"
+                            className="block text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 
+                            font-normal bg-gradient-to-r from-amber-400 via-amber-300 
+                            to-orange-400 bg-clip-text text-transparent pb-1 sm:pb-2"
                             initial={{ opacity: 0, y: 50 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ 
@@ -92,13 +108,13 @@ export default function Hero() {
                                 delay: 0.4
                             }}
                         >
-                            & Product Designer
+                            Product Designer
                         </motion.span>
                     </div>
 
                     {/* Subheading */}
                     <motion.p
-                        className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light mb-12 max-w-3xl mx-auto leading-relaxed mt-6"
+                        className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light mb-8 sm:mb-10 lg:mb-12 max-w-3xl mx-auto leading-relaxed mt-4 sm:mt-6 px-2"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ 
@@ -112,7 +128,7 @@ export default function Hero() {
 
                     {/* CTA Buttons */}
                     <motion.div
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+                        className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 lg:gap-6 px-2"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ 
@@ -128,7 +144,7 @@ export default function Hero() {
                         >
                             <Link
                                 href="/pages/work"
-                                className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full text-base sm:text-lg font-medium hover:shadow-xl transition-all duration-300 backdrop-blur-sm min-h-[44px] touch-manipulation"
+                                className="group inline-flex items-center gap-2 px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-4 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full text-sm sm:text-base lg:text-lg font-medium hover:shadow-xl transition-all duration-300 backdrop-blur-sm min-h-[44px] touch-manipulation text-white w-full sm:w-auto justify-center"
                             >
                                 <span>View Work</span>
                                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
@@ -142,11 +158,11 @@ export default function Hero() {
                         >
                             <Link
                                 href="#contact"
-                                className="group relative inline-block text-base sm:text-lg text-gray-600 hover:text-amber-600 transition-colors min-h-[44px] flex items-center touch-manipulation"
+                                className="group relative inline-block text-base sm:text-lg text-gray-300 hover:text-amber-400 transition-colors min-h-[44px] flex items-center touch-manipulation"
                             >
                                 <span className="relative z-10">Get in touch</span>
                                 <motion.span
-                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-600 to-orange-600 origin-left"
+                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-400 origin-left"
                                     initial={{ scaleX: 0 }}
                                     whileHover={{ scaleX: 1 }}
                                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -164,7 +180,7 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.6, delay: 1 }}
-                    className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 z-20"
+                    className="absolute bottom-6 sm:bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 z-20"
                 >
                     <motion.div
                         animate={{ y: [0, 8, 0] }}
@@ -181,8 +197,8 @@ export default function Hero() {
                             }
                         }}
                     >
-                        <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600" />
-                        <span className="text-xs sm:text-sm text-amber-600 font-light">Scroll</span>
+                        <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
+                        <span className="text-xs sm:text-sm text-amber-400 font-light">Scroll</span>
                     </motion.div>
                 </motion.div>
             )}

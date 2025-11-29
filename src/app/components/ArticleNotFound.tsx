@@ -10,11 +10,11 @@ interface ArticleNotFoundProps {
 
 export default function ArticleNotFound({ slug, error }: ArticleNotFoundProps) {
     return (
-        <div className="min-h-screen bg-white flex items-center justify-center px-6 py-24 relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden">
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 -right-32 w-96 h-96 bg-amber-200/20 blur-3xl rounded-full animate-pulse" />
-                <div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-orange-200/20 blur-3xl rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+                <div className="absolute top-1/4 -right-32 w-96 h-96 bg-amber-500/10 blur-3xl rounded-full animate-pulse" />
+                <div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-orange-500/10 blur-3xl rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
             </div>
 
             <div className="relative z-10 max-w-2xl mx-auto text-center">
@@ -26,9 +26,9 @@ export default function ArticleNotFound({ slug, error }: ArticleNotFoundProps) {
                     className="mb-8 flex justify-center"
                 >
                     <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full blur-xl opacity-50 animate-pulse" />
-                        <div className="relative bg-gradient-to-br from-amber-100 to-orange-100 rounded-full p-6 border-4 border-amber-200">
-                            <FileText className="w-16 h-16 text-amber-600" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full blur-xl opacity-30 animate-pulse" />
+                        <div className="relative bg-gradient-to-br from-amber-900/30 to-orange-900/30 rounded-full p-6 border-4 border-amber-800/50">
+                            <FileText className="w-16 h-16 text-amber-400" />
                         </div>
                     </div>
                 </motion.div>
@@ -40,9 +40,9 @@ export default function ArticleNotFound({ slug, error }: ArticleNotFoundProps) {
                     transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                     className="mb-6"
                 >
-                    <h1 className="text-5xl sm:text-6xl md:text-7xl font-light mb-4 text-gray-900">
+                    <h1 className="text-5xl sm:text-6xl md:text-7xl font-light mb-4 text-white">
                         Article
-                        <span className="block bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
+                        <span className="block bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
                             Not Found
                         </span>
                     </h1>
@@ -55,13 +55,13 @@ export default function ArticleNotFound({ slug, error }: ArticleNotFoundProps) {
                     transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                     className="mb-8"
                 >
-                    <p className="text-lg sm:text-xl text-gray-600 font-light max-w-md mx-auto leading-relaxed mb-4">
+                    <p className="text-lg sm:text-xl text-gray-300 font-light max-w-md mx-auto leading-relaxed mb-4">
                         {error || "The article you're looking for doesn't exist or may have been moved."}
                     </p>
                     {slug && (
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-lg text-sm text-gray-600 font-mono">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-800/50 backdrop-blur-sm rounded-lg text-sm text-gray-300 font-mono border border-gray-700">
                             <Search className="w-4 h-4" />
-                            <span>Slug: <span className="text-amber-600">{slug}</span></span>
+                            <span>Slug: <span className="text-amber-400">{slug}</span></span>
                         </div>
                     )}
                 </motion.div>
@@ -107,7 +107,7 @@ export default function ArticleNotFound({ slug, error }: ArticleNotFoundProps) {
                     >
                         <Link
                             href="/pages/blog"
-                            className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full text-base sm:text-lg font-medium text-white hover:shadow-xl transition-all duration-300 min-h-[44px] touch-manipulation"
+                            className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full text-base sm:text-lg font-medium text-white hover:shadow-xl transition-all duration-300 min-h-[44px] touch-manipulation"
                         >
                             <BookOpen className="w-4 h-4 sm:w-5 sm:h-5" />
                             <span>Browse Articles</span>
@@ -121,7 +121,7 @@ export default function ArticleNotFound({ slug, error }: ArticleNotFoundProps) {
                     >
                         <Link
                             href="/"
-                            className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white border-2 border-gray-200 rounded-full text-base sm:text-lg font-medium text-gray-700 hover:border-amber-600 hover:text-amber-600 transition-all duration-300 min-h-[44px] touch-manipulation"
+                            className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gray-900/50 backdrop-blur-sm border-2 border-gray-700 rounded-full text-base sm:text-lg font-medium text-gray-300 hover:border-amber-400 hover:text-amber-400 transition-all duration-300 min-h-[44px] touch-manipulation"
                         >
                             <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                             <span>Go Home</span>
@@ -134,7 +134,7 @@ export default function ArticleNotFound({ slug, error }: ArticleNotFoundProps) {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.8 }}
-                    className="mt-12 text-sm text-gray-500 font-light"
+                    className="mt-12 text-sm text-gray-400 font-light"
                 >
                     <p className="mb-2">📚 Maybe it's still being written, or got lost in the codebase</p>
                     <p className="text-xs">Check out other articles while you're here!</p>

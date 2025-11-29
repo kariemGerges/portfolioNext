@@ -39,7 +39,6 @@ const nextConfig = {
     
     // Enable experimental features
     experimental: {
-      serverActions: true,
       optimizePackageImports: ['lucide-react', 'framer-motion'],
     },
     

@@ -25,7 +25,7 @@ export default function FeaturedImage() {
                     <div className="absolute inset-0 flex items-center justify-center text-gray-400">
                         <Image
                             src={img}
-                            alt="Descriptive alt text"
+                            alt="Kariem Gerges - Software Engineer & Product Designer Portfolio"
                             width={600}
                             height={400}
                             loading="lazy" 

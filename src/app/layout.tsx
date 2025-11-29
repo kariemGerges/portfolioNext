@@ -38,13 +38,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "/",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://kariemgerges.com",
     siteName: "Kariem Gerges Portfolio",
     title: "Kariem Gerges | Software Engineer & Product Designer",
     description: "Enterprise software solutions architect with 5+ years of experience. Specializing in React, Next.js, TypeScript, and scalable cloud architecture.",
     images: [
       {
-        url: "/hero.jpg",
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://kariemgerges.com"}/hero.jpg`,
         width: 1200,
         height: 630,
         alt: "Kariem Gerges - Software Engineer & Product Designer",
@@ -55,8 +55,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kariem Gerges | Software Engineer & Product Designer",
     description: "Enterprise software solutions architect with 5+ years of experience. Specializing in React, Next.js, TypeScript, and scalable cloud architecture.",
-    images: ["/hero.jpg"],
+    images: [`${process.env.NEXT_PUBLIC_SITE_URL || "https://kariemgerges.com"}/hero.jpg`],
     creator: "@kariemgerges",
+    site: "@kariemgerges",
   },
   robots: {
     index: true,
@@ -94,6 +95,7 @@ export default function RootLayout({
     "description": "Enterprise software solutions architect with 5+ years of experience specializing in React, Next.js, TypeScript, and scalable cloud architecture.",
     "url": process.env.NEXT_PUBLIC_SITE_URL || "https://kariemgerges.com",
     "email": "kariem.gerges@outlook.com",
+    "image": `${process.env.NEXT_PUBLIC_SITE_URL || "https://kariemgerges.com"}/hero.jpg`,
     "sameAs": [
       "https://github.com/kariemGerges",
       "https://www.linkedin.com/in/kariem-gerges-458294195/"
@@ -113,17 +115,53 @@ export default function RootLayout({
     "alumniOf": {
       "@type": "Organization",
       "name": "Software Engineering"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Freelance"
+    }
+  };
+
+  // Website structured data
+  const websiteStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Kariem Gerges Portfolio",
+    "url": process.env.NEXT_PUBLIC_SITE_URL || "https://kariemgerges.com",
+    "description": "Software Engineer & Product Designer portfolio showcasing enterprise solutions and technical expertise.",
+    "author": {
+      "@type": "Person",
+      "name": "Kariem Gerges"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${process.env.NEXT_PUBLIC_SITE_URL || "https://kariemgerges.com"}/pages/blog?search={search_term_string}`
+      },
+      "query-input": "required name=search_term_string"
     }
   };
 
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#f59e0b" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Kariem Gerges" />
+      </head>
       <body
-        className="antialiased min-h-screen flex flex-col bg-white"
+        className="antialiased min-h-screen flex flex-col"
       >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
         />
         <Header />
         {children}

@@ -36,10 +36,10 @@ export default function BlogImage({
     if (!imageSrc || imageError) {
         return (
             <div
-                className={`relative bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center ${className}`}
+                className={`relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center ${className}`}
                 style={fill ? {} : { width, height }}
             >
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-500">
                     <ImageIcon className="w-12 h-12 sm:w-16 sm:h-16 mb-2 opacity-50" />
                     <span className="text-xs sm:text-sm font-light">No Image</span>
                 </div>
