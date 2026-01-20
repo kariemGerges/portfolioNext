@@ -19,16 +19,13 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
-// Note: You'll need to import the actual images. For now, using placeholders
-// import donationPal from '../../../../public/donationPal1.png';
-// import eCommerce from '../../../../public/ecommerce1.png';
-// etc.
+
 
 const projects = [
     {
         id: 1,
         title: 'Portfolio Next',
-        image: '/portLight.jpg',
+        image: '/mp.png',
         alt: 'Portfolio Next.js Website',
         webSite: 'https://kariemgerges.vercel.app',
         githubUrl: 'https://github.com/kariemGerges/portfolioNext',
@@ -54,9 +51,23 @@ const projects = [
         database: ['MongoDB', 'Supabase', 'Prisma'],
     },
     {
+        id: 15,
+        title: 'Indiana iLearn',
+        image: '/ilearn-homepage.png',
+        alt: 'Indiana iLearn 4th Grade Practice Exams',
+        webSite: 'https://ilearn-ten.vercel.app/',
+        githubUrl: '',
+        category: 'Education',
+        gradient: 'from-blue-600 via-indigo-600 to-purple-600',
+        prevDescription: '<div><h1>Indiana iLearn: 4th Grade Practice Exams</h1><p>Free practice assessments aligned with Indiana State Standards for Mathematics and English Language Arts. This educational platform helps students build confidence and prepare for success with real exam-style questions. Features instant scoring, multiple question formats, and comprehensive progress tracking.</p><h2>Features:</h2><ul><li><strong>Mathematics Practice:</strong> 44 questions covering Number Sense, Computation, Geometry, Measurement, and Data Analysis (70-100 minutes)</li><li><strong>English Language Arts:</strong> 40 questions covering Reading Foundations, Reading Comprehension, Vocabulary, Grammar, and Writing (90 minutes)</li><li><strong>Difficulty Levels:</strong> Below-Level (Easy), On-Level (Medium), and Above-Level (Hard) options</li><li><strong>Instant Scoring:</strong> Get immediate feedback after submission</li><li><strong>Multiple Formats:</strong> Multiple choice, passage-based, and writing tasks</li><li><strong>Standards Aligned:</strong> All questions follow Indiana Academic Standards for Grade 4</li></ul><h2>Technology Stack:</h2><ul><li><strong>Frontend:</strong> Next.js, React, TypeScript, Tailwind CSS</li><li><strong>Backend:</strong> Next.js API Routes</li><li><strong>Deployment:</strong> Vercel</li></ul><p><strong>Purpose:</strong> Designed to simulate the real iLearn assessment experience and help Indiana students prepare effectively for their official assessments.</p></div>',
+        frontend: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+        backend: ['Next.js API Routes'],
+        database: [],
+    },
+    {
         id: 3,
         title: 'iBrain',
-        image: '/ecommerce1.png',
+        image: '/ibrain-homepage.png',
         alt: 'iBrain Application',
         webSite: 'https://ibrain.vercel.app',
         githubUrl: 'https://github.com/kariemGerges/iBrain',
@@ -70,7 +81,7 @@ const projects = [
     {
         id: 4,
         title: 'Donation Pal',
-        image: '/donationPal1.png',
+        image: '/donationpal1.png',
         alt: 'Donation Pal',
         webSite: 'https://kariemgerges.github.io/donationPal-frontend/',
         githubUrl: 'https://github.com/kariemGerges/donationPal-frontend',
@@ -98,7 +109,7 @@ const projects = [
     {
         id: 6,
         title: 'Admin Dashboard',
-        image: '/ecommerce1.png',
+        image: '/admin-dashboard-homepage.png',
         alt: 'E-Commerce Admin Dashboard',
         webSite: 'https://ecommerce-frontend-admindashborad.vercel.app/',
         githubUrl: 'https://github.com/kariemGerges/ecommerce-frontend-admin',
@@ -112,7 +123,7 @@ const projects = [
     {
         id: 7,
         title: 'Guide Me',
-        image: '/ecommerce1.png',
+        image: '/guide-me-homepage.png',
         alt: 'Guide Me',
         webSite: 'https://kariemgerges.github.io/GuideMe/',
         githubUrl: 'https://github.com/kariemGerges/GuideMe',
@@ -132,6 +143,7 @@ const projects = [
         githubUrl: 'https://github.com/kariemGerges/stockMe2_frontend',
         category: 'FinTech',
         gradient: 'from-yellow-500 via-orange-500 to-red-500',
+        underConstruction: true,
         prevDescription: '<div><h1>StockMe: Real-Time Stock Management</h1><p>StockMe offers real-time stock data, market analysis, and advanced inventory management. Built with React, Node.js, and Express for the front-end and back-end, it integrates Python for AI-driven analysis to help users make informed investment and inventory decisions.</p><h2>Technology Stack:</h2><ul><li><strong>Frontend:</strong> React, JavaScript</li><li><strong>Backend:</strong> Node.js, Express, Python</li><li><strong>Database:</strong> Modern database solution</li></ul><p><strong>Repositories:</strong> <a href="https://github.com/kariemGerges/stockMe2_frontend" target="_blank">Frontend</a> | <a href="https://github.com/kariemGerges/StockMe2-backend-express" target="_blank">Express Backend</a> | <a href="https://github.com/kariemGerges/StockMe2-Backend-py" target="_blank">Python Backend</a> | <a href="https://github.com/kariemGerges/StockMe-BackEnd-node" target="_blank">Node Backend</a> | <a href="https://github.com/kariemGerges/StockMe-frontEnd" target="_blank">Legacy Frontend</a></p></div>',
         frontend: ['React', 'JavaScript'],
         backend: ['Node.js', 'Express', 'Python'],
@@ -168,13 +180,13 @@ const projects = [
     {
         id: 11,
         title: 'WatchMe',
-        image: '/ecommerce1.png',
-        alt: 'WatchMe Application',
-        webSite: '',
+        image: '/watchme-homepage.png',
+        alt: 'WatchMe Luxury Watch E-Commerce Platform',
+        webSite: 'https://watchme-eight-omega.vercel.app/',
         githubUrl: 'https://github.com/kariemGerges/watchme',
-        category: 'Entertainment',
+        category: 'E-Commerce',
         gradient: 'from-pink-500 via-red-500 to-orange-500',
-        prevDescription: '<div><h1>WatchMe: Entertainment Platform</h1><p>A modern entertainment platform built with TypeScript and React, providing users with a seamless viewing experience. Features include content discovery, personalized recommendations, and user-friendly interface.</p><h2>Technology Stack:</h2><ul><li><strong>Frontend:</strong> TypeScript, React</li><li><strong>Backend:</strong> Modern backend solution</li><li><strong>Database:</strong> Database solution</li></ul></div>',
+        prevDescription: '<div><h1>WatchMe: Luxury Watch E-Commerce Platform</h1><p>A premium e-commerce platform for luxury timepieces, featuring elegant design and seamless shopping experience. WatchMe showcases exceptional craftsmanship with Swiss precision movements, lifetime warranties, and master watchmaking expertise.</p><h2>Features:</h2><ul><li><strong>Product Collections:</strong> Men\'s, Women\'s, and Limited Edition timepieces</li><li><strong>Shop by Category:</strong> Altitude Series, Heritage Collection, Oceanic Professional, Metropolitan, Celestial, and Athletic Elite</li><li><strong>Featured Products:</strong> Classic Chronograph, Ocean Explorer, Aviator Professional, Urban Minimalist</li><li><strong>Customer Testimonials:</strong> Service and repair reviews from satisfied customers</li><li><strong>Swiss Movement:</strong> Every watch features precision Swiss movement</li><li><strong>Lifetime Warranty:</strong> Comprehensive warranty coverage</li><li><strong>Master Craftsmanship:</strong> Hand-assembled by skilled watchmakers</li></ul><h2>Technology Stack:</h2><ul><li><strong>Frontend:</strong> TypeScript, React</li><li><strong>E-Commerce:</strong> Shopping cart, product catalog, category browsing</li><li><strong>User Experience:</strong> Account management, search functionality</li></ul><p><strong>Website:</strong> <a href="https://watchme-eight-omega.vercel.app/" target="_blank">https://watchme-eight-omega.vercel.app/</a></p></div>',
         frontend: ['TypeScript', 'React'],
         backend: ['Backend'],
         database: ['Database'],
@@ -188,6 +200,7 @@ const projects = [
         githubUrl: 'https://github.com/kariemGerges/redpos',
         category: 'Business',
         gradient: 'from-red-600 via-pink-600 to-purple-600',
+        underConstruction: true,
         prevDescription: '<div><h1>RedPOS: Point of Sale System</h1><p>A comprehensive Point of Sale (POS) system built with TypeScript and modern web technologies. Features include inventory management, sales tracking, receipt generation, and reporting capabilities.</p><h2>Technology Stack:</h2><ul><li><strong>Frontend:</strong> TypeScript, React</li><li><strong>Backend:</strong> TypeScript, Node.js</li><li><strong>Database:</strong> Modern database solution</li></ul></div>',
         frontend: ['TypeScript', 'React'],
         backend: ['TypeScript', 'Node.js'],
@@ -267,8 +280,11 @@ export default function Work() {
     };
 
     const filteredProjects = useMemo(() => {
-        if (selectedCategory === 'All') return projects;
-        return projects.filter(p => p.category === selectedCategory);
+        if (selectedCategory === 'All') {
+            return projects;
+        }
+        const filtered = projects.filter(p => p.category === selectedCategory);
+        return filtered;
     }, [selectedCategory]);
 
     return (
@@ -355,6 +371,8 @@ export default function Work() {
                         >
                             {filteredProjects.map((project, index) => {
                                 const CategoryIcon = categoryIcons[project.category];
+                                const isAndroidApp = project.id === 9 || project.id === 10; // TeachMe or ChatNCook
+                                const isBackendProject = project.id === 14; // Portfolio Backend
                                 return (
                                     <motion.div
                                         key={project.id}
@@ -369,15 +387,139 @@ export default function Work() {
                                             {/* Gradient Overlay */}
                                             <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
                                             
-                                            {/* Image */}
+                                            {/* Image, Under Construction, or Android App */}
                                             <div className="relative w-full h-full">
-                                                <Image
-                                                    src={project.image}
-                                                    alt={project.alt}
-                                                    fill
-                                                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                                />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                                                {project.underConstruction ? (
+                                                    <div className="relative w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-800 via-gray-900 to-black">
+                                                        {/* Animated Background Pattern */}
+                                                        <div className="absolute inset-0 opacity-20">
+                                                            <div 
+                                                                className="absolute inset-0"
+                                                                style={{
+                                                                    backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px)`,
+                                                                    backgroundSize: '28px 28px',
+                                                                    animation: 'slide 3s linear infinite'
+                                                                }}
+                                                            />
+                                                        </div>
+                                                        
+                                                        {/* Animated Construction Icon */}
+                                                        <div className="relative z-10 flex flex-col items-center justify-center gap-4">
+                                                            <motion.div
+                                                                animate={{ 
+                                                                    rotate: [0, 10, -10, 0],
+                                                                    scale: [1, 1.1, 1]
+                                                                }}
+                                                                transition={{ 
+                                                                    duration: 2,
+                                                                    repeat: Infinity,
+                                                                    ease: "easeInOut"
+                                                                }}
+                                                                className="text-6xl sm:text-7xl lg:text-8xl"
+                                                            >
+                                                                🚧
+                                                            </motion.div>
+                                                            <motion.div
+                                                                initial={{ opacity: 0, y: 10 }}
+                                                                animate={{ opacity: [0.5, 1, 0.5], y: 0 }}
+                                                                transition={{ 
+                                                                    duration: 2,
+                                                                    repeat: Infinity,
+                                                                    ease: "easeInOut"
+                                                                }}
+                                                                className="text-center"
+                                                            >
+                                                                <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white mb-1">
+                                                                    Under Construction
+                                                                </h3>
+                                                                <p className="text-xs sm:text-sm text-gray-400">
+                                                                    Coming Soon
+                                                                </p>
+                                                            </motion.div>
+                                                        </div>
+                                                        
+                                                        {/* Animated Progress Bar */}
+                                                        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-3/4 max-w-xs">
+                                                            <div className="h-1 bg-gray-700 rounded-full overflow-hidden">
+                                                                <motion.div
+                                                                    className="h-full bg-gradient-to-r from-amber-400 via-orange-500 to-red-500"
+                                                                    initial={{ width: "0%" }}
+                                                                    animate={{ width: ["0%", "100%", "0%"] }}
+                                                                    transition={{ 
+                                                                        duration: 3,
+                                                                        repeat: Infinity,
+                                                                        ease: "easeInOut"
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        {/* Sparkle Effects */}
+                                                        {[...Array(6)].map((_, i) => (
+                                                            <motion.div
+                                                                key={i}
+                                                                className="absolute w-2 h-2 bg-amber-400 rounded-full"
+                                                                style={{
+                                                                    left: `${20 + i * 15}%`,
+                                                                    top: `${30 + (i % 3) * 20}%`,
+                                                                }}
+                                                                animate={{
+                                                                    opacity: [0, 1, 0],
+                                                                    scale: [0, 1.5, 0],
+                                                                }}
+                                                                transition={{
+                                                                    duration: 2,
+                                                                    repeat: Infinity,
+                                                                    delay: i * 0.3,
+                                                                    ease: "easeInOut"
+                                                                }}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                ) : isAndroidApp ? (
+                                                    <div className="relative w-full h-full flex items-center justify-center bg-gradient-to-br from-green-800 via-green-900 to-emerald-900">
+                                                        {/* Android Logo */}
+                                                        <div className="flex flex-col items-center justify-center gap-3">
+                                                            <svg
+                                                                width="80"
+                                                                height="80"
+                                                                viewBox="0 0 24 24"
+                                                                fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24"
+                                                            >
+                                                                <path
+                                                                    d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997 0-.5511.4482-.9993.9993-.9993.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997 0-.5511.4482-.9993.9993-.9993.551 0 .9993.4482.9993.9993 0 .5511-.4483.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.2439 13.8533 7.8508 12 7.8508s-3.5902.3931-5.1349 1.0957L4.8428 5.4437a.4161.4161 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.186.8535 12.7874.8535 15.7406v.9229c0 .5092.4159.9251.9251.9251h20.443c.5092 0 .9251-.4159.9251-.9251v-.9229c0-2.9532-1.8354-4.5546-5.1345-5.4192"
+                                                                    fill="#3DDC84"
+                                                                />
+                                                            </svg>
+                                                            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white">
+                                                                Android App
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                ) : isBackendProject ? (
+                                                    <div className="relative w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-700 via-slate-700 to-zinc-800">
+                                                        {/* Backend Logo */}
+                                                        <div className="flex flex-col items-center justify-center gap-3">
+                                                            <Database className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 text-gray-300" />
+                                                            <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white">
+                                                                Backend
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <>
+                                                        <Image
+                                                            src={project.image}
+                                                            alt={project.alt}
+                                                            fill
+                                                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                                            unoptimized
+                                                        />
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                                                    </>
+                                                )}
                                             </div>
 
                                             {/* Category Badge */}
@@ -412,14 +554,20 @@ export default function Work() {
                                                 {project.title}
                                             </h3>
                                             <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                                                {project.frontend.map((tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className="px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs bg-gray-900/50 rounded border border-gray-700 text-gray-300 font-mono"
-                                                    >
-                                                        {tech}
+                                                {project.frontend && project.frontend.length > 0 ? (
+                                                    project.frontend.map((tech) => (
+                                                        <span
+                                                            key={tech}
+                                                            className="px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs bg-gray-900/50 rounded border border-gray-700 text-gray-300 font-mono"
+                                                        >
+                                                            {tech}
+                                                        </span>
+                                                    ))
+                                                ) : (
+                                                    <span className="px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs bg-gray-900/50 rounded border border-gray-700 text-gray-300 font-mono">
+                                                        Backend Project
                                                     </span>
-                                                ))}
+                                                )}
                                             </div>
                                         </div>
                                     </motion.div>
