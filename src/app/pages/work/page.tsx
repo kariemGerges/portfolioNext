@@ -24,7 +24,7 @@ import Link from 'next/link';
 const projects = [
     {
         id: 1,
-        title: 'Portfolio Next',
+        title: 'Portfolio NEXT.js',
         image: '/mp.png',
         alt: 'Portfolio Next.js Website',
         webSite: 'https://kariemgerges.vercel.app',
@@ -208,10 +208,10 @@ const projects = [
     },
     {
         id: 13,
-        title: 'Portfolio Page',
+        title: 'Portfolio Page React',
         image: '/portLight.jpg',
         alt: 'Portfolio Page',
-        webSite: '',
+        webSite: 'https://kariemgerges.github.io/portfolioPage/',
         githubUrl: 'https://github.com/kariemGerges/portfolioPage',
         category: 'Portfolio',
         gradient: 'from-cyan-500 via-blue-500 to-indigo-500',
