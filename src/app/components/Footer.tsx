@@ -182,7 +182,8 @@ export const Footer: React.FC<PortfolioFooterProps> = ({ ownerName }) => {
                             }}
                             className="text-sm text-gray-400 font-light"
                         >
-                            Built with Next.js & TypeScript
+                            Built with ❤️ by 
+                            <a href="https://kariemgerges.vercel.app" className="text-amber-400 hover:text-amber-300 transition-colors"> Kariem Gerges</a>
                         </motion.div>
                     </div>
                 </div>

@@ -180,7 +180,7 @@ const projects = [
     {
         id: 11,
         title: 'WatchMe',
-        image: '/watchme-homepage.png',
+        image: '/watchme.png',
         alt: 'WatchMe Luxury Watch E-Commerce Platform',
         webSite: 'https://watchme-eight-omega.vercel.app/',
         githubUrl: 'https://github.com/kariemGerges/watchme',
